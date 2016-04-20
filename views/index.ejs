@@ -1,75 +1,11 @@
-<!--<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
--->
+<% include partials/head %>
 
-<!doctype html>
-<html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description"
-          content="Introducing Clear Review, a powerful tool that allows student to review AUB Professors and courses">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title><%= title %></title>
+<!-- Page styles -->
+<link rel="stylesheet" href="stylesheets/libraries/material.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/welcome-screen/cr-dialog-polyfill.css">
+<link rel="stylesheet" href="stylesheets/welcome-screen/cr-welcome-screen-style.css">
+<!-- End of styles-->
 
-    <!-- Disable tap highlight on IE -->
-    <meta name="msapplication-tap-highlight" content="no">
-
-    <!-- Web Application Manifest -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Clear Review">
-    <link rel="icon" sizes="192x192" href="images/touch/Logo_192x192.png">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
-    <!-- TODO: This should be changed to 155x155 -->
-    <link rel="apple-touch-icon" href="images/touch/Logo_144x144.png">
-
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/Logo_128x128.png">
-    <meta name="msapplication-TileColor" content="#2F3BA2">
-
-    <!-- Color the status bar on mobile devices -->
-    <meta name="theme-color" content="#2F3BA2">
-
-    <!-- Material Design Lite page styles:
-    You can choose other color schemes from the CDN, more info here http://www.getmdl.io/customize/index.html
-    Format: material.color1-color2.min.css, some examples:
-    material.red-teal.min.css
-    material.blue-orange.min.css
-    material.purple-indigo.min.css
-    -->
-    <!-- <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.blue-orange.min.css"> -->
-
-
-    <!-- Material Design icons-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-
-    <!-- Material Design font-->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-
-    <!-- Page styles -->
-    <link rel="stylesheet" href="stylesheets/libraries/material.css">
-    <link rel="stylesheet" href="stylesheets/welcome-screen/welcome-screen-style.css">
-
-    <!-- End of styles-->
 </head>
 <body>
 <span id="#"></span>
@@ -84,20 +20,89 @@
             <div class="android-header-spacer mdl-layout-spacer"></div>
 
             <!-- Navigation -->
+            <!-- Navigation -->
             <div class="android-navigation-container">
                 <nav class="android-navigation mdl-navigation">
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" id="SignInButton" href="#">Sign
-                        In</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" id="SignUpButton" href="#">Sign
-                        Up</a>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect MyNavButtons"  id="show-dialog-Signin">Sign In</button>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect MyNavButtons"  id="show-dialog-Signup">Sign Up</button>
                 </nav>
             </div>
+
       <span class="android-mobile-title mdl-layout-title">
          <img class="cr-logo-image" src="images/logo/Logo_Dark_481x146.png">
       </span>
 
         </div>
     </div>
+
+    <!-- HERE ARE THE DIALOGS FOR SIGNIN AND SIGN UP -->
+
+    <!-- Dialog for sign in here -->
+    <dialog id="SignInDialog" class="mdl-dialog CRMyForm">
+        <h4 class="mdl-dialog__title">Sign In</h4>
+        <div class="mdl-dialog__content">
+            <p>
+                Enter your credentials to sign in.
+            </p>
+
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="sample3">
+                    <label class="mdl-textfield__label" for="sample3">Email</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="sample3">
+                    <label class="mdl-textfield__label" for="sample3">Password</label>
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">Cancel</button>
+            <button type="button" class="mdl-button">Confirm</button>
+        </div>
+    </dialog>
+
+
+
+    <!-- Dialog for sign up here -->
+
+    <dialog id="SignUpDialog" class="mdl-dialog  CRMyForm">
+        <h4 class="mdl-dialog__title">Sign Up</h4>
+        <div class="mdl-dialog__content">
+            <p>
+                Enter your credentials to sign up.
+            </p>
+
+
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="sample3">
+                    <label class="mdl-textfield__label" for="sample3">Email</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="sample3">
+                    <label class="mdl-textfield__label" for="sample3">Password</label>
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">Cancel</button>
+            <button type="button" class="mdl-button">Confirm</button>
+        </div>
+    </dialog>
+
+    <!-- END OF DIALOGS FOR SIGNIN AND SIGN UP-->
+
+
 
     <!-- TITLE AND PICTURE AREA -->
     <div class="cr-drawer mdl-layout__drawer mdl-layout--small-screen-only">
@@ -106,8 +111,8 @@
           <img class="cr-logo-image" src="images/logo/Logo_Clear_478x141.png">
      </span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Sign In</a>
-            <a class="mdl-navigation__link" href="">Sign Up</a>
+            <a class="mdl-navigation__link"  id="show-dialog-Signin-zoom">Sign In</a>
+            <a class="mdl-navigation__link"  id="show-dialog-SignUp-zoom">Sign Up</a>
         </nav>
     </div>
 
@@ -174,7 +179,6 @@
                 <!-- End of Navigation Card -->
 
             </div>
-
             <div class="cr-bigcard-section">
                 <div class="cr-inner-card">
                     <div class="cr-welcoming-text">
@@ -194,4 +198,7 @@
 
 </body>
 <script src="javascripts/libraries/material.js"></script>
+<script src="javascripts/welcome-screen/cr-dialog-polyfill.js"></script>
+<script src="javascripts/welcome-screen/cr-registration-form.js"></script>
+
 </html>
