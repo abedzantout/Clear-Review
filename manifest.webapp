@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "name": "Clear Review",
+  "launch_path": "/index.html",
+  "description": "An application that allows students to review courses and professors alike",
+  "icons": {
+    "128": "/images/touch/icon-128x128.png"
+  },
+  "developer": {
+    ["name": "Abdel Rahman Zantout",
+    "url": "http://github.com/abedzantout"],
+    ["name": "Alaa Al-Hariri",
+     "url": "https://github.com/ashariri95"],
+     ["name": "Elissa Mkanna",
+      "url" : "https://github.com/egm12"],
+      ["name" : "Ali Al-Obaji",
+        "url" : "https://github.com/AliObaji"
+      ]
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "Clear Review",
+      "description": "An application that allows students to review courses and professors alike"
+    }
+  }
+}
