@@ -1,7 +1,7 @@
 // config/passport.js
 
 // load all the things we need
-var LocalStrategy   = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 // load up the user model
 var mysql = require('mysql');
@@ -9,9 +9,13 @@ var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('./database');
 var connection = mysql.createConnection(dbconfig.connection);
 
+//TODO: implement regular express
+var re = /^[a-zA-Z]{3}[0-9]{1,}@mail\.aub\.edu$/i;
+
+
 connection.query('USE ' + dbconfig.database);
 // expose this function to our app using module.exports
-module.exports = function(passport) {
+module.exports = function (passport) {
 
     // =========================================================================
     // passport session setup ==================================================
@@ -20,13 +24,13 @@ module.exports = function(passport) {
     // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser(function (user, done) {
         done(null, user.id);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        connection.query("SELECT * FROM students WHERE id = ? ",[id], function(err, rows){
+    passport.deserializeUser(function (id, done) {
+        connection.query("SELECT * FROM students WHERE id = ? ", [id], function (err, rows) {
             done(err, rows[0]);
         });
     });
@@ -41,14 +45,15 @@ module.exports = function(passport) {
         'local-signup',
         new LocalStrategy({
                 // by default, local strategy uses username and password, we will override with email
-                usernameField : 'email',
-                passwordField : 'password',
-                passReqToCallback : true // allows us to pass back the entire request to the callback
+                usernameField: 'email',
+                passwordField: 'password',
+                passReqToCallback: true // allows us to pass back the entire request to the callback
             },
-            function(req, email, password, done) {
+            function (req, email, password, done) {
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
-                connection.query("SELECT * FROM students WHERE email = ?",[email], function(err, rows) {
+
+                connection.query("SELECT * FROM students WHERE email = ?", [email], function (err, rows) {
                     if (err)
                         return done(err);
                     if (rows.length) {
@@ -63,13 +68,14 @@ module.exports = function(passport) {
 
                         var insertQuery = "INSERT INTO students ( email, password ) values (?,?)";
 
-                        connection.query(insertQuery,[newUserMysql.email, newUserMysql.password],function(err, rows) {
+                        connection.query(insertQuery, [newUserMysql.email, newUserMysql.password], function (err, rows) {
                             newUserMysql.id = rows.insertId;
 
                             return done(null, newUserMysql);
                         });
                     }
                 });
+
             })
     );
 
@@ -83,12 +89,12 @@ module.exports = function(passport) {
         'local-login',
         new LocalStrategy({
                 // by default, local strategy uses username and password, we will override with email
-                usernameField : 'email',
-                passwordField : 'password',
-                passReqToCallback : true // allows us to pass back the entire request to the callback
+                usernameField: 'email',
+                passwordField: 'password',
+                passReqToCallback: true // allows us to pass back the entire request to the callback
             },
-            function(req, email, password, done) { // callback with email and password from our form
-                connection.query("SELECT * FROM students WHERE email = ?",[email], function(err, rows){
+            function (req, email, password, done) { // callback with email and password from our form
+                connection.query("SELECT * FROM students WHERE email = ?", [email], function (err, rows) {
                     if (err)
                         return done(err);
                     if (!rows.length) {
