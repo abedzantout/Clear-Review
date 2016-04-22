@@ -5,6 +5,6 @@ module.exports = {
         'user': 'root',
         'password': 'mysql'
     },
-    'database': 'nodetest',
+    'database': 'clearreview_testing',
     'users_table': 'students'
 };

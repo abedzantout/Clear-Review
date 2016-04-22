@@ -1,18 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var passport = require('passport');
-var flash = require('connect-flash');
-var session  = require('express-session');
-var routes = require('./routes/index');
-var morgan = require('morgan');
-var users = require('./routes/users');
+var express         = require('express');
+var path            = require('path');
+var favicon         = require('serve-favicon');
+var logger          = require('morgan');
+var cookieParser    = require('cookie-parser');
+var bodyParser      = require('body-parser');
+var passport        = require('passport');
+var flash           = require('connect-flash');
+var session         = require('express-session');
+var routes          = require('./routes/index');
+var morgan          = require('morgan');
+var users           = require('./routes/users');
 
 
-var app = express();
+var app             = express();
+
 require('./config/passport')(passport); // pass passport for configuration
 app.use(morgan('dev')); // log every request to the console
 
@@ -22,9 +23,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-
-
-
 
 
 // view engine setup
@@ -47,7 +45,7 @@ app.use(session({
     secret: 'vidyapathaisalwaysrunning',
     resave: true,
     saveUninitialized: true
-} )); // session secret
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -55,8 +53,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 require('./app/cr-auth-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-
-
 
 
 // catch 404 and forward to error handler
