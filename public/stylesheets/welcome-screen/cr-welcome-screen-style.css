@@ -79,7 +79,7 @@ a img {
 }
 
 .android-header .mdl-navigation__link {
-    color: #757575;
+    color: #757575; !important;
     font-weight: 700;
     font-size: 14px;
 }

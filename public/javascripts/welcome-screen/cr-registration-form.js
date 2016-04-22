@@ -26,6 +26,26 @@ window.onload = function() {
     dialogSignUp.close();
   });
 
+
+
+
+  //SHOW DIALOG FOR SIGUP LINK
+    //TODO: to fix
+  var dialogSignUpLink = document.getElementById("SignUpDialog");
+  var showDialogButtonSignUpLink = document.getElementById("show-dialog-Signup-intro");
+  if (! dialogSignUpLink.showModal) {
+    dialogPolyfill.registerDialog(dialogSignUpLink);
+  }
+  showDialogButtonSignUpLink.addEventListener('click', function() {
+      dialogSignUpLink.showModal();
+  });
+    dialogSignUpLink.querySelector('.close').addEventListener('click', function() {
+      dialogSignUpLink.close();
+  });
+
+
+
+
   //SHOW DIALOG FOR SIGNIN BUTTON ZOOM
   var showDialogButtonSignInZoom = document.getElementById("show-dialog-Signin-zoom");
   if (! dialog.showModal) {
