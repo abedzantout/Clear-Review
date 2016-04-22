@@ -1,0 +1,26 @@
+<dialog id="SignInDialog" class="mdl-dialog CRMyForm">
+    <h4 class="mdl-dialog__title">Sign In</h4>
+    <div class="mdl-dialog__content">
+        <p>
+            Enter your credentials to sign in.
+        </p>
+
+
+        <form action= "/login" method="post">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input form-control" type="text" name= "email" id="email">
+                <label class="mdl-textfield__label" for="email">Email</label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input form-control" name="password" type="password" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Password</label>
+            </div>
+
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button close">Cancel</button>
+                <button type="submit" class="mdl-button">Confirm</button>
+            </div>
+        </form>
+    </div>
+</dialog>

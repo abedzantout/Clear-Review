@@ -23,8 +23,12 @@
             <!-- Navigation -->
             <div class="android-navigation-container">
                 <nav class="android-navigation mdl-navigation">
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect MyNavButtons"  id="show-dialog-Signin">Sign In</button>
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect MyNavButtons"  id="show-dialog-Signup">Sign Up</button>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect MyNavButtons" id="show-dialog-Signin">
+                        <a href="/login">Sign In </a>
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect MyNavButtons" id="show-dialog-Signup">
+                        <a href="/signup"> Sign Up</a>
+                    </button>
                 </nav>
             </div>
 
@@ -35,73 +39,22 @@
         </div>
     </div>
 
+
+
+
+
+
     <!-- HERE ARE THE DIALOGS FOR SIGNIN AND SIGN UP -->
 
     <!-- Dialog for sign in here -->
-    <dialog id="SignInDialog" class="mdl-dialog CRMyForm">
-        <h4 class="mdl-dialog__title">Sign In</h4>
-        <div class="mdl-dialog__content">
-            <p>
-                Enter your credentials to sign in.
-            </p>
 
-
-            <form action="#">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="sample3">
-                    <label class="mdl-textfield__label" for="sample3">Email</label>
-                </div>
-
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="sample3">
-                    <label class="mdl-textfield__label" for="sample3">Password</label>
-                </div>
-
-            </form>
-
-
-        </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button close">Cancel</button>
-            <button type="button" class="mdl-button">Confirm</button>
-        </div>
-    </dialog>
-
-
+    <% include auth/login %>
 
     <!-- Dialog for sign up here -->
 
-    <dialog id="SignUpDialog" class="mdl-dialog  CRMyForm">
-        <h4 class="mdl-dialog__title">Sign Up</h4>
-        <div class="mdl-dialog__content">
-            <p>
-                Enter your credentials to sign up.
-            </p>
-
-
-            <form action="#">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="sample3">
-                    <label class="mdl-textfield__label" for="sample3">Email</label>
-                </div>
-
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="sample3">
-                    <label class="mdl-textfield__label" for="sample3">Password</label>
-                </div>
-
-            </form>
-
-
-        </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button close">Cancel</button>
-            <button type="button" class="mdl-button">Confirm</button>
-        </div>
-    </dialog>
+    <% include auth/signup %>
 
     <!-- END OF DIALOGS FOR SIGNIN AND SIGN UP-->
-
 
 
     <!-- TITLE AND PICTURE AREA -->
@@ -111,8 +64,8 @@
           <img class="cr-logo-image" src="images/logo/Logo_Clear_478x141.png">
      </span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link"  id="show-dialog-Signin-zoom">Sign In</a>
-            <a class="mdl-navigation__link"  id="show-dialog-SignUp-zoom">Sign Up</a>
+            <a class="mdl-navigation__link" id="show-dialog-Signin-zoom">Sign In</a>
+            <a class="mdl-navigation__link" id="show-dialog-SignUp-zoom">Sign Up</a>
         </nav>
     </div>
 
