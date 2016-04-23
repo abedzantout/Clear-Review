@@ -13,9 +13,14 @@
                     <input type="text" name="typehead" placeholder="Search" size="1" class="typeahead tt-query"
                            autocomplete="off" spellcheck="false">
                 </form>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="user-button">
                     <%= user.email %>
                 </button>
+
+                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                    for="user-button">
+                    <li class="mdl-menu__item"><a href="/logout">Logout</a></li>
+                </ul>
             </div>
 
             <!-- Displayed on mobile -->

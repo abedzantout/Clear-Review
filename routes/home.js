@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 module.exports = function (app, passport) {
-
     router.get('/home', isLoggedIn, function (req, res, next) {
         res.render('home', {
             title: 'Clear Review',
