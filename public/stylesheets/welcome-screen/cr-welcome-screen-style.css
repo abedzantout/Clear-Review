@@ -364,7 +364,7 @@ a img {
 }
 
 .android-customized-section-image {
-    background: url('../images/devices.jpg') center top no-repeat;
+
     background-size: cover;
     height: 400px;
 }
@@ -595,7 +595,13 @@ a img {
     border-style: none;
     border-bottom: solid #2b98f0;;
 }
-
+a{
+    color: #222222;
+    text-decoration: none;
+}
+.CRCourseProfile{
+    width: 1000px;
+}
 
 
 
