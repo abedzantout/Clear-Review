@@ -14,6 +14,7 @@ var re = /^[a-zA-Z]{3}[0-9]{1,}@mail\.aub\.edu$/i;
 
 
 connection.query('USE ' + dbconfig.database);
+
 // expose this function to our app using module.exports
 module.exports = function (passport) {
 

@@ -1,0 +1,26 @@
+.CourseProfileHeader{
+    width: 100%;
+    border-bottom: solid 1px  #303f9f;
+}
+.mdl-dialog__title{
+    color: #303f9f;
+}
+.mdl-dialog__content{
+    color: #3f51b5;
+}
+.mdl-dialog__actions{
+    float: right;
+}
+.CourseProfileContent{
+    margin-left: 2%;
+}
+
+#CourseProfileCheckBoxForm{
+    margin-top: 2%;
+}
+#ResultsDescription{
+    color: #3f51b5;
+    width: 70%;
+    font-size: large;
+    line-height: 150%;
+}

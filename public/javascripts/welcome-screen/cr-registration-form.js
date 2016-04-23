@@ -70,4 +70,23 @@ window.onload = function() {
     dialog.close();
   });
 
+    var dialogProfile = document.getElementById("CourseProfile");
+    var CourseProfilebutton = document.getElementById("show-dialog-CourseProfile");
+    if (! dialogProfile.showModal) {
+        dialogPolyfill.registerDialog(dialogProfile);
+    }
+    CourseProfilebutton.addEventListener('click', function() {
+        dialogProfile.showModal();
+    });
+    dialogProfile.querySelector('.close').addEventListener('click', function() {
+        dialogProfile.close();
+    });
+
+
+
+
+
+
+
+
 };
