@@ -10,6 +10,7 @@ var session         = require('express-session');
 var routes          = require('./routes/index');
 var morgan          = require('morgan');
 var users           = require('./routes/users');
+var home            = require('./routes/home');
 
 
 var app             = express();
@@ -38,6 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/', home);
 
 
 // required for passport
