@@ -11,6 +11,7 @@ var routes          = require('./routes/index');
 var morgan          = require('morgan');
 var users           = require('./routes/users');
 var home            = require('./routes/home');
+var mysql           = require('mysql');
 
 var app             = express();
 
@@ -23,6 +24,20 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+
+
+
+
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'mysql',
+    database: 'my_db'
+});
+connection.connect();
+
+
+
 
 
 // view engine setup
@@ -40,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 
+
 // required for passport
 app.use(session({
     secret: 'vidyapathaisalwaysrunning',
@@ -53,7 +69,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 require('./app/cr-auth-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-require('./routes/home')(app, passport);
+require('./app/search.js')(app, connection);
 
 
 // catch 404 and forward to error handler

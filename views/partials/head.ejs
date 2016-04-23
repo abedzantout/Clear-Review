@@ -54,3 +54,19 @@
 
     <link rel="stylesheet" href="stylesheets/libraries/normalize.css">
     <link rel="stylesheet" href="stylesheets/search-bar/styles.css">
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="javascripts/libraries/typeahead.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('input.typeahead').typeahead({
+                name: 'courses',
+                remote: 'http://localhost:3000/search?key=%QUERY',
+                limit: 10
+            });
+        });
+    </script>
+
+
