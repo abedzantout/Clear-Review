@@ -1,5 +1,4 @@
 window.onload = function() {
-
 //SHOW DIALOG FOR SIGNIN BUTTON
   var dialog = document.getElementById("SignInDialog");
   var showDialogButton = document.getElementById("show-dialog-Signin");
@@ -70,7 +69,11 @@ window.onload = function() {
     dialog.close();
   });
 
-    var dialogProfile = document.getElementById("CourseProfile");
+
+
+
+  //SHOW DIALOG FOR CourseProfileDetails
+    var dialogProfile = document.getElementById("CourseProfileDetails");
     var CourseProfilebutton = document.getElementById("show-dialog-CourseProfile");
     if (! dialogProfile.showModal) {
         dialogPolyfill.registerDialog(dialogProfile);

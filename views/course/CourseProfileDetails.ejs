@@ -1,0 +1,139 @@
+<dialog id="CourseProfileDetails" class="mdl-dialog CRCourseProfile">
+    <link rel="stylesheet" type="text/css" href="stylesheets/CourseProfile.css">
+
+
+    <!-- The nodejs code below is hard coded for now. These variables should be assigned with a DB query-->
+    <% CourseTitle = "Software Engineering";
+    CourseSubject = "CMPS";
+    CourseNumber = "253";
+    CourseCredits = "3 Cr";
+    Question1title = "Question1";
+    Question2title = "Question2";
+    Question3title = "Question3";
+    Question4title = "Question4";
+    Question5title = "Question5";
+    Question1Answers = [100,24,102];
+    Question2Answers = [200,40,98];
+    Question3Answers = [54,34,143];
+    Question4Answers = [134,123,50];
+    Question5Answers = [131,32,80];
+    TotalVoters = 0;
+    for(var i in Question1Answers) { TotalVoters += Question1Answers[i]; }
+    %>
+
+    <div class="CourseProfileHeader">
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">X</button>
+        </div>
+        </br>
+        <h4 class="mdl-dialog__title"><%= CourseSubject + " " + CourseNumber %></h4>
+        <h5 class="mdl-dialog__content">
+            <%= CourseTitle + " - " + CourseCredits %>
+        </h5>
+    </div>
+
+    <div class="CourseProfileContent">
+        <div id="CourseProfileCheckBoxForm">
+            <p class="ResultsDescription">
+                Below you can view the total results of the evaluation forms filled by the students for this particular
+                course instance. Clicking on the check boxes will display the results for that particular question on
+                the graph below. Activating multiple check boxes will sum the results of the selected questions.
+            </p></br></br>
+            <p class="ResultsDescription">
+                Total number of voters so far: <%= TotalVoters%>
+            </p>
+            <section id="CheckboxSection">
+
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                       for="checkbox-1">
+                    <input onclick="addData(this);" value="<%= Question1Answers[0]%>,<%= Question1Answers[1]%>,<%= Question1Answers[2]%>" type="checkbox"
+                           id="checkbox-1"
+                           class="mdl-checkbox__input"/>
+                    <span class="mdl-checkbox__label"><%= Question1title %></span>
+                </label>
+
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                       for="checkbox-2">
+                    <input onclick="addData(this);" value="<%= Question2Answers[0]%>,<%= Question2Answers[1]%>,<%= Question2Answers[2]%>" type="checkbox"
+                           id="checkbox-2"
+                           class="mdl-checkbox__input"/>
+                    <span class="mdl-checkbox__label"><%= Question2title %></span>
+                </label>
+
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                       for="checkbox-3">
+                    <input onclick="addData(this);" value="<%= Question3Answers[0]%>,<%= Question3Answers[1]%>,<%= Question3Answers[2]%>" type="checkbox"
+                           id="checkbox-3"
+                           class="mdl-checkbox__input"/>
+                    <span class="mdl-checkbox__label"><%= Question3title %></span>
+                </label>
+
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                       for="checkbox-4">
+                    <input onclick="addData(this);" value="<%= Question4Answers[0]%>,<%= Question4Answers[1]%>,<%= Question4Answers[2]%>" type="checkbox"
+                           id="checkbox-4"
+                           class="mdl-checkbox__input"/>
+                    <span class="mdl-checkbox__label"><%= Question4title %></span>
+                </label>
+
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                       for="checkbox-5">
+                    <input onclick="addData(this);" value="<%= Question5Answers[0]%>,<%= Question5Answers[1]%>,<%= Question5Answers[2]%>" type="checkbox"
+                           id="checkbox-5"
+                           class="mdl-checkbox__input"/>
+                    <span class="mdl-checkbox__label"><%= Question5title %></span>
+                </label>
+
+            </section>
+            <section id="ChartArea">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </section>
+        </div>
+    </div>
+
+
+    <!-- SCRIPTS FOR THE CHART-->
+    <script src="javascripts/libraries/Chart.js"></script>
+    <script>
+        var data = [
+            {
+                value: 0,
+                color: "#F7464A",
+                highlight: "#FF5A5E",
+                label: "People who said answered yes."
+            },
+            {
+                value: 0,
+                color: "#46BFBD",
+                highlight: "#5AD3D1",
+                label: "People who said answered no."
+            },
+            {
+                value: 0,
+                color: "#FDB45C",
+                highlight: "#FFC870",
+                label: "People who said answered maybe."
+            }
+        ];
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myNewChart = new Chart(ctx).PolarArea(data);
+
+        //This function allows us to dynamically add data to the chart.
+        function addData(optionVal) {
+            var test = optionVal.value.split(",");
+            if (optionVal.checked) {
+                myNewChart.segments[0].value += parseInt(test[0]);
+                myNewChart.segments[1].value += parseInt(test[1]);
+                myNewChart.segments[2].value += parseInt(test[2]);
+                myNewChart.update();
+            } else {
+                myNewChart.segments[0].value -= parseInt(test[0]);
+                myNewChart.segments[1].value -= parseInt(test[1]);
+                myNewChart.segments[2].value -= parseInt(test[2]);
+                myNewChart.update();
+            }
+        }
+    </script>
+
+
+</dialog>
