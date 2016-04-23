@@ -10,7 +10,7 @@ var dbconfig = require('./database');
 var connection = mysql.createConnection(dbconfig.connection);
 
 //TODO: implement regular express
-var re = /^[a-zA-Z]{3}[0-9]{1,}@mail\.aub\.edu$/i;
+//var re = /^[a-zA-Z]{3}[0-9]{1,}@mail\.aub\.edu$/i;
 
 
 connection.query('USE ' + dbconfig.database);

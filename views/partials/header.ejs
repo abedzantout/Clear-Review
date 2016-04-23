@@ -1,0 +1,31 @@
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs ">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary mdl-layout__header--waterfall">
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+
+
+            <img src="images/logo/Logo_Clear_478x141.png">
+
+
+            <div class="mdh-expandable-search mdl-cell--hide-phone">
+                <i class="material-icons">search</i>
+                <form action="#">
+                    <input type="text" name="typehead" placeholder="Search" size="1" class="typeahead tt-query"
+                           autocomplete="off" spellcheck="false">
+                </form>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    <%= user.email %>
+                </button>
+            </div>
+
+            <!-- Displayed on mobile -->
+            <div class="mdl-layout-spacer mdl-cell--hide-tablet mdl-cell--hide-desktop"></div>
+            <!-- Search button -->
+            <button class="mdh-toggle-search mdl-button mdl-js-button mdl-button--icon mdl-cell--hide-tablet mdl-cell--hide-desktop">
+                <i class="material-icons">search</i>
+            </button>
+
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row ">
+
+        </div>

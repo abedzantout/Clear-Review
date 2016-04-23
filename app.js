@@ -12,7 +12,6 @@ var morgan          = require('morgan');
 var users           = require('./routes/users');
 var home            = require('./routes/home');
 
-
 var app             = express();
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -39,7 +38,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/', home);
 
 
 // required for passport
@@ -55,6 +53,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 require('./app/cr-auth-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./routes/home')(app, passport);
 
 
 // catch 404 and forward to error handler
