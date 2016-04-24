@@ -1,4 +1,4 @@
-var express         = require('express');
+var express         = require('express')
 var path            = require('path');
 var favicon         = require('serve-favicon');
 var logger          = require('morgan');
@@ -12,8 +12,14 @@ var morgan          = require('morgan');
 var users           = require('./routes/users');
 var home            = require('./routes/home');
 var mysql           = require('mysql');
-var helmet          = require('helmet')
+var helmet          = require('helmet');
 var app             = express();
+
+
+// socket.io
+var server   = require('http').Server(app);
+var io       = require('socket.io')(server);
+
 
 require('./config/passport')(passport); // pass passport for configuration
 app.use(morgan('dev')); // log every request to the console
@@ -71,8 +77,12 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 //require('./app/cr-auth-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/cr-auth-routes')(app, passport);
 require('./app/search.js')(app, connection);
-require('./routes/home')(app);
+
+
+
+
 
 
 // catch 404 and forward to error handler
