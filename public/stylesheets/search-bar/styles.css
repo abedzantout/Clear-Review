@@ -1,0 +1,168 @@
+/* TODO: Hover and Focus state.
+ *       Fix position of mobile search button.
+ */
+.mdh-expandable-search {
+    margin: 0 50px;
+    margin-top: 40px;
+    align-items: center;
+    justify-content: center;
+}
+.tt-query,
+.tt-hint {
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 24px;
+    height: 30px;
+    line-height: 30px;
+    width: 500px;
+    max-width: 900px;
+}
+
+.tt-query {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+.tt-hint {
+    color: #999999;
+}
+
+.tt-dataset-courses {
+    width: 500px;
+    max-width: 900px;
+}
+.twitter-typeahead {
+    width: inherit;
+    z-index: 10000000000;
+}
+.tt-dropdown-menu {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 12px;
+    padding: 8px 0;
+    width: inherit;
+    max-width: 900px;
+}
+
+.tt-suggestion {
+    font-size: 24px;
+    line-height: 24px;
+    padding: 3px 20px;
+    width: inherit;
+    z-index: 10000000000;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+    background-color: #0097CF;
+    color: black;
+}
+
+.tt-suggestion p {
+    margin: 0;
+    color: black;
+}
+
+
+
+
+
+.mdl-layout--large-screen-only img {
+    margin: 0 50px;
+    margin-top: 35px;
+    margin-left: 100px;
+    height: 40px;
+}
+.mdh-expandable-search button {
+    margin-left: 100px;
+    background-color: #FFFFFF;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    color: #222222;
+    height: 40px;
+    width: 10%;
+}
+.mdh-expandable-search form {
+    max-width: 900px;
+}
+.mdl-layout__header-row {
+    width: 100%
+}
+.mdh-expandable-search,
+.mdh-expandable-search form,
+.mdh-expandable-search input {
+    /* Cross browser flex-grow */
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.mdh-expandable-search,
+.mdh-expandable-search img,
+.mdh-expandable-search form {
+    /* Cross browser inline-flex */
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -moz-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+
+/* Position search icon */
+.mdh-expandable-search .material-icons {
+    position: relative;
+    right: -40px;
+    margin-left: -24px; /* Remove the blank space left behind by the icon being relatively positioned */
+    color: #222222;
+}
+
+.mdh-expandable-search input {
+    outline: none;
+    border: none;
+    font-size: 16px;
+    color: #222222;
+    background-color: #FFFFFF;
+    padding: 0px 35px 0px 70px;
+    height: 40px;
+    /* TODO: This was recommended for cross browser compatability of input height, check if its actually needed in modern browsers */
+
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+}
+
+.mdh-expandable-search input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #222222;
+}
+.mdh-expandable-search input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #222222;
+    opacity:  1; /* Firefox gives the placeholder a reduced opacity so we have to increase it */
+}
+.mdh-expandable-search input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #222222;
+    opacity:  1; /* Firefox gives the placeholder a reduced opacity so we have to increase it */
+}
+.mdh-expandable-search input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #222222;
+}
+
+
+/* Bug fix: https://github.com/google/material-design-lite/issues/1078
+ * To much padding on the left of header when the menu button is hidden */
+@media screen and (min-width: 851px) {
+    .mdl-layout__header-row {
+        padding: 0 40px 0 40px;
+    }
+}
+
+/* Bug fix for badges being in the wrong location */
+/*.mdl-badge[data-badge]:after {
+  right: -7px;
+  top: -8px;
+} */
+

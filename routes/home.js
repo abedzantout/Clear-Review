@@ -1,9 +1,15 @@
 var express = require('express');
 var router = express.Router();
+var url = require('url');
+var passport = require('passport');
 
-/* GET welcome page. */
-router.get('/home', function(req, res, next) {
-    res.render('home', { title: 'Clear Review' });
-});
 
-module.exports = router;
+module.exports = function (app) {
+    require('../app/cr-auth-routes')(app, passport);
+    app.get('/home', function (req, res, next) {
+        var queryData = url.parse(req.url, true).query;
+        console.log('im in');
+
+    });
+    return router;
+};
