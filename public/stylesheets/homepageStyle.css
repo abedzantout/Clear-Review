@@ -1,0 +1,13 @@
+a{
+    color: #222222;
+    text-decoration: none;
+}
+
+.MyNavButtons {
+    height: inherit !important;
+}
+
+.MyNavButtons:hover {
+    border-style: none;
+    border-bottom: solid #2b98f0;;
+}

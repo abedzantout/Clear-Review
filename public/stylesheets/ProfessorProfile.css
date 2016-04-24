@@ -1,0 +1,68 @@
+#ProfessorProfile {
+    background-color: transparent;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: none;
+    width: 1500px;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.ProfessorProfileHeader{
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    float:right;
+
+}
+
+.horizontalDividor{
+    width:100%;
+    border-bottom: solid 1px  #303f9f;
+}
+
+.mdl-dialog__title{
+    color: #303f9f;
+}
+.mdl-dialog__content{
+    color: #3f51b5;
+    font-size: 70px;
+    border-bottom: solid 1px #3f51b5;
+}
+.mdl-dialog__actions{
+    float: right;
+}
+.ProfileBox{
+    height: 800px;
+}
+
+.ResultsDescription{
+    color: #3f51b5;
+    width: 70%;
+    font-size: large;
+    line-height: 150%;
+    margin-left: 2%;
+}
+
+
+
+.InProfileCards{
+    border-bottom: 1px solid #3f51b5;
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-bottom: 10px;
+}
+
+.mdl-card__title{
+    background-color: #3f51b5;
+    color: #222222;
+}
+.CardHolder{
+    margin-left: 1%;
+    margin-right: 1%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding-left:5%;
+    padding-right: 5%;
+}
+

@@ -1,4 +1,4 @@
-<dialog id="CourseProfileDetails" class="mdl-dialog CRCourseProfile">
+<dialog id="CourseProfile" class="mdl-dialog CRCourseProfile">
     <link rel="stylesheet" type="text/css" href="stylesheets/CourseProfile.css">
 
 
@@ -21,26 +21,33 @@
     for(var i in Question1Answers) { TotalVoters += Question1Answers[i]; }
     %>
 
-    <div class="CourseProfileHeader">
+    <div class="CourseProfileHeader ProfileBox">
         <div class="mdl-dialog__actions">
             <button type="button" class="mdl-button close">X</button>
         </div>
         </br>
-        <h4 class="mdl-dialog__title"><%= CourseSubject + " " + CourseNumber %></h4>
         <h5 class="mdl-dialog__content">
-            <%= CourseTitle + " - " + CourseCredits %>
+            <%= CourseSubject + " " + CourseNumber%>
         </h5>
+        <h4 class="mdl-dialog__title"><%= CourseTitle + " - " + CourseCredits%></h4>
+
+
+        <p class="ResultsDescription">
+            Below you can view the total results of the evaluation forms filled by the students for this particular
+            course instance. Clicking on the check boxes will display the results for that particular question on
+            the graph below. Activating multiple check boxes will sum the results of the selected questions.
+        </p>
+
+        <section id="ChartArea">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </section>
     </div>
 
-    <div class="CourseProfileContent">
+    <div class="CourseProfileContent ProfileBox">
         <div id="CourseProfileCheckBoxForm">
-            <p class="ResultsDescription">
-                Below you can view the total results of the evaluation forms filled by the students for this particular
-                course instance. Clicking on the check boxes will display the results for that particular question on
-                the graph below. Activating multiple check boxes will sum the results of the selected questions.
-            </p></br></br>
-            <p class="ResultsDescription">
-                Total number of voters so far: <%= TotalVoters%>
+            </br></br>
+            <p class="CheckBoxDescription">
+                Begin by selecting which Question you wish to see the results for.
             </p>
             <section id="CheckboxSection">
 
@@ -83,12 +90,12 @@
                            class="mdl-checkbox__input"/>
                     <span class="mdl-checkbox__label"><%= Question5title %></span>
                 </label>
-
-            </section>
-            <section id="ChartArea">
-                <canvas id="myChart" width="400" height="400"></canvas>
             </section>
         </div>
+        <p class="CheckBoxDescription">
+            Total number of voters so far: <%= TotalVoters%>
+        </p>
+
     </div>
 
 
@@ -100,19 +107,19 @@
                 value: 0,
                 color: "#F7464A",
                 highlight: "#FF5A5E",
-                label: "People who said answered yes."
+                label: "People who answered yes."
             },
             {
                 value: 0,
                 color: "#46BFBD",
                 highlight: "#5AD3D1",
-                label: "People who said answered no."
+                label: "People who answered no."
             },
             {
                 value: 0,
                 color: "#FDB45C",
                 highlight: "#FFC870",
-                label: "People who said answered maybe."
+                label: "People who answered maybe."
             }
         ];
         var ctx = document.getElementById("myChart").getContext("2d");

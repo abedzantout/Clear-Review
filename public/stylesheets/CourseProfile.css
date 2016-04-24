@@ -1,12 +1,46 @@
-#CourseProfileDetails{
-    margin-right: 10%;
+#CourseProfile {
+    background-color: transparent;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: none;
+    width: 1500px;
 }
 .CourseProfileHeader{
-    width: 100%;
+    width: 65%;
+    background-color: #FFFFFF;
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    float:right;
+    height: 756px;
+
+}
+
+.ProfileBox{
+    height: 800px;
+
+}
+.CheckBoxDescription{
+    color: #3f51b5;
+    width: 70%;
+    font-size: large;
+    line-height: 150%;
+}
+
+.CourseProfileContent{
+    width:30%;
+    margin-right: 2%;
+    background-color: #FFFFFF;
+    float:left;
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    padding-left: 2%;
+}
+.horizontalDividor{
+    width:100%;
     border-bottom: solid 1px  #303f9f;
 }
+
 .mdl-dialog__title{
     color: #303f9f;
+    margin-bottom: 3%;
 }
 .mdl-dialog__content{
     color: #3f51b5;
@@ -14,9 +48,7 @@
 .mdl-dialog__actions{
     float: right;
 }
-.CourseProfileContent{
-    margin-left: 2%;
-}
+
 
 #CourseProfileCheckBoxForm{
     margin-top: 2%;
@@ -26,16 +58,18 @@
     width: 70%;
     font-size: large;
     line-height: 150%;
+    margin-left: 2%;
 }
 #myChart{
-    z-index: 10000;
+    margin-right: 30%;
+    margin-left: 30%;
 }
 
 #CheckboxSection{
-    float:left;
-    width: 100px;
+    color: #3f51b5;
+    width: 100%;
 }
 #ChartArea{
-    float:right;
+
     margin-right: 20%;
 }

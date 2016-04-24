@@ -6,6 +6,7 @@ window.onload = function() {
     dialogPolyfill.registerDialog(dialog);
   }
   showDialogButton.addEventListener('click', function() {
+
     dialog.showModal();
   });
   dialog.querySelector('.close').addEventListener('click', function() {
@@ -68,28 +69,4 @@ window.onload = function() {
   dialog.querySelector('.close').addEventListener('click', function() {
     dialog.close();
   });
-
-
-
-
-  //SHOW DIALOG FOR CourseProfileDetails
-    var dialogProfile = document.getElementById("CourseProfileDetails");
-    var CourseProfilebutton = document.getElementById("show-dialog-CourseProfile");
-    if (! dialogProfile.showModal) {
-        dialogPolyfill.registerDialog(dialogProfile);
-    }
-    CourseProfilebutton.addEventListener('click', function() {
-        dialogProfile.showModal();
-    });
-    dialogProfile.querySelector('.close').addEventListener('click', function() {
-        dialogProfile.close();
-    });
-
-
-
-
-
-
-
-
 };
