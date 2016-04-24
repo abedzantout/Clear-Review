@@ -1,5 +1,6 @@
 var express = require('express');
-var router = express.Router();
+var router  = express.Router();
+//var url     = require('url');
 
 module.exports = function (app, connection) {
     app.get('/search', function (req, res) {
@@ -11,7 +12,9 @@ module.exports = function (app, connection) {
                     data.push(rows[i].email);
                 }
                 res.end(JSON.stringify(data));
-                console.log(JSON.stringify(data)) //TODO: to extract info from
+                //console.log(JSON.stringify(data)) //TODO: to extract info from -- DONE
+                //var queryData = url.parse(req.url, true).query;
+                //console.log(JSON.stringify(queryData.key));
             });
     });
     return router;

@@ -48,7 +48,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // security measure against xss attacks
 app.use(helmet.xssFilter());
+// hide powered by express
 app.use(helmet.hidePoweredBy());
+// security measure against sniffing
 app.use(helmet.noSniff());
 
 
@@ -68,8 +70,9 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // routes ======================================================================
-require('./app/cr-auth-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+//require('./app/cr-auth-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 require('./app/search.js')(app, connection);
+require('./routes/home')(app);
 
 
 // catch 404 and forward to error handler

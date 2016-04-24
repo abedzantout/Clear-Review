@@ -1,21 +1,15 @@
 var express = require('express');
 var router = express.Router();
+var url = require('url');
+var passport = require('passport');
 
-module.exports = function (app, passport) {
-    router.get('/home', isLoggedIn, function (req, res, next) {
-        res.render('home', {
-            title: 'Clear Review',
-            user: req.user
-        });
+
+module.exports = function (app) {
+    require('../app/cr-auth-routes')(app, passport);
+    app.get('/home', function (req, res, next) {
+        var queryData = url.parse(req.url, true).query;
+        console.log('im in');
+
     });
     return router;
 };
-
-function isLoggedIn(req, res, next) {
-// if user is logged in - 
-    if (req.isAuthenticated())
-        return next();
-// if they aren't redirect them to home
-    res.redirect('/');
-}
-
