@@ -1,93 +1,35 @@
-<!-- views/profile.ejs -->
 <!doctype html>
 <html>
 <head>
-	<title>Node Authentication</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-
-	<style>
-		body 		{ padding-top:80px; word-wrap:break-word; }
-	</style>
+    <title>Socket.IO chat</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font: 13px Helvetica, Arial; }
+        form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+        #messages { list-style-type: none; margin: 0; padding: 0; }
+        #messages li { padding: 5px 10px; }
+        #messages li:nth-child(odd) { background: #eee; }
+    </style>
 </head>
 <body>
-<div class="container">
-	<div>
-		<div class="page-header text-center">
-			<h1><span class="fa fa-anchor"></span> Profile Page</h1>
-			<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-		</div>
-
-		<div class="row">
-
-			<!-- LOCAL INFORMATION -->
-			<div class="col-sm-6">
-				<div class="well">
-					<h3><span class="fa fa-user"></span> Local</h3>
-
-					<p>
-						<strong>id</strong>: <%= user.id %><br>
-						<strong>username</strong>: <%= user.email %><br>
-						<strong>password</strong>: <%= user.password %>
-					</p>
-
-				</div>
-			</div>
-
-		</div>
-
-
-
-		<!-- Code for course profile begins here -->
-		<link rel="stylesheet" href="stylesheets/libraries/material.css">
-		<link rel="stylesheet" href="stylesheets/homepageStyles.css">
-		<link rel="stylesheet" type="text/css" href="stylesheets/libraries/cr-dialog-polyfill.css">
-		<script src="javascripts/libraries/material.js"></script>
-		<script src="javascripts/libraries/cr-dialog-polyfill.js"></script>
-		<script src="javascripts/Home/cr-home-cards.js"></script>
-
-
-		<% include course/CourseProfileDetails.ejs%>
-		<% include professor/ProfessorProfile.ejs%>
-
-		<div class="demo-card-square mdl-card mdl-shadow--2dp">
-			<div class="mdl-card__title mdl-card--expand">
-				<h2 class="mdl-card__title-text">CMPS 253</h2>
-			</div>
-			<div class="mdl-card__supporting-text">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
-			</div>
-			<div class="mdl-card__actions mdl-card--border">
-				<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons CourseCard">
-					<a href="/login">View</a>
-				</button>
-			</div>
-		</div>
-
-
-
-
-			<div class="demo-card-square mdl-card mdl-shadow--2dp">
-				<div class="mdl-card__title mdl-card--expand">
-					<h2 class="mdl-card__title-text">Mahmoud Bdeir</h2>
-				</div>
-				<div class="mdl-card__supporting-text">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
-				</div>
-				<div class="mdl-card__actions mdl-card--border">
-					<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ProfessorCard">
-						<a href="/login">View</a>
-					</button>
-				</div>
-			</div>
-
-
-
-
-
-
-		<!-- Code for course profile ends here -->
-	</div>
-</div>
+<ul id="messages"></ul>
+<form action="">
+    <input id="m" autocomplete="off" /><button>Send</button>
+</form>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    var socket = io();
+    $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+    });
+    socket.on('chat message', function(msg){
+        $('#messages').append($('<li>').text(msg));
+    });
+</script>
 </body>
 </html>
