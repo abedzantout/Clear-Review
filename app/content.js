@@ -1,13 +1,13 @@
 var app = require('express');
-var router  = app.Router();
 
+module.exports = function(app, io) {
 
-module.exports = function(io) {
-
-    io.sockets.on('connection', function (socket) {
-        socket.on('captain', function(data) {
-            console.log(data);
-            socket.emit('Hello');
+    app.get('/profile',function(req, res){
+        res.render('profile.ejs');
+    });
+    io.on('connection', function(socket){
+        socket.on('chat message', function(msg){
+            io.emit('chat message', msg);
         });
     });
 };

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var url = require('url');
 
-module.exports = function (app, connection) {
+module.exports = function (app, connection, io) {
 
 
     // app.use(function (req, res, next) {
@@ -23,6 +23,11 @@ module.exports = function (app, connection) {
                     data.push(rows[i].email);
                 }
                 res.send(data);
+                io.on('connection', function(socket){
+                    socket.emit('news', {
+                        data: 'world'
+                    });
+                });
                 var queryData = url.parse(req.url, true).query;
                 console.log(JSON.stringify(queryData.key));
 
