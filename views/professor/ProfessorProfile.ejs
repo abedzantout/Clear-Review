@@ -1,0 +1,62 @@
+<dialog id="ProfessorProfile" class="mdl-dialog CRCourseProfile">
+    <link rel="stylesheet" type="text/css" href="stylesheets/ProfessorProfile.css">
+
+
+    <!-- The nodejs code below is hard coded for now. These variables should be assigned with a DB query-->
+    <%
+    ProfessorFName = "Mahmoud";
+    ProfessorLName = "Bdeir";
+
+    CoursesTaught = ['CMPS 253','CMPS 258','CMPS 212','CMPS 257','CMPS 200'];
+
+
+    %>
+
+    <div class="ProfessorProfileHeader">
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">X</button>
+        </div>
+        <h5 class="mdl-dialog__content"> <%= ProfessorFName + " " + ProfessorLName %></h5></br>
+        <p class="ResultsDescription">
+            Below are the courses being taught by <%= ProfessorFName + " " + ProfessorLName %>
+        </p>
+        <div class="CardHolder">
+        </div>
+    </div>
+
+
+    <script>
+        <%for( var i = 0; i < CoursesTaught.length;i++){ %>
+            var containingDiv = document.getElementsByClassName("CardHolder")[0];
+            var span = document.createElement("div");
+            span.className = "tab";
+            containingDiv.appendChild(span);
+            var outercard = document.createElement("div");
+            outercard.className="demo-card-square mdl-card mdl-shadow--2dp InProfileCards";
+            containingDiv.appendChild(outercard);
+            var cardHeader = document.createElement("div");
+            cardHeader.className = "mdl-card__title mdl-card--expand";
+            outercard.appendChild(cardHeader);
+            var title = document.createElement("h2");
+            title.className="mdl-card__title-text";
+            title.innerHTML="<%-CoursesTaught[i];%>";
+            cardHeader.appendChild(title);
+            var cardDescription = document.createElement("div");
+            cardDescription.className="mdl-card__supporting-text";
+            cardDescription.innerHTML="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
+            outercard.appendChild(cardDescription);
+            var cardAction = document.createElement("div");
+            cardAction.className="mdl-card__actions mdl-card--border";
+            outercard.appendChild(cardAction);
+            var cardButton = document.createElement("div");
+            cardButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons CourseCard";
+            cardButton.innerHTML = "View";
+            cardAction.appendChild(cardButton);
+        <% }
+        %>
+    </script>
+
+    <script src="javascripts/libraries/cr-dialog-polyfill.js"></script>
+
+
+</dialog>
