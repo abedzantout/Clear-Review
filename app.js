@@ -12,7 +12,7 @@ var morgan          = require('morgan');
 var users           = require('./routes/users');
 var home            = require('./routes/home');
 var mysql           = require('mysql');
-
+var helmet          = require('helmet')
 var app             = express();
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -26,19 +26,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-
-
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'mysql',
-    database: 'my_db'
+    database: 'clearreview'
 });
 connection.connect();
-
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,6 +45,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// security measure against xss attacks
+app.use(helmet.xssFilter());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.noSniff());
+
 
 app.use('/', routes);
 
@@ -102,6 +102,4 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-
 module.exports = app;

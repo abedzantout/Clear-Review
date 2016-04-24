@@ -16,13 +16,13 @@ module.exports = function (app, passport) {
         .get(function (req, res) {
 
             // render the page and pass in any flash data if it exists
-            res.render('login.ejs', {message: req.flash('loginMessage')});
+            res.render('auth/login.ejs', {message: req.flash('loginMessage')});
         })
 
         // process the login form
         .post(passport.authenticate('local-login', {
                 successRedirect: '/home', // redirect to the secure profile section
-                failureRedirect: '/login', // redirect back to the signup page if there is an error
+                failureRedirect: '/', // redirect back to the signup page if there is an error
                 failureFlash: true // allow flash messages
             }),
             function (req, res) {
@@ -42,14 +42,17 @@ module.exports = function (app, passport) {
     // =====================================
     // show the signup form
     app.get('/signup', function (req, res) {
+        //TODO: to fix
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', {message: req.flash('signupMessage')});
+        res.render('signup.ejs', {
+            message: req.flash('signupMessage')
+        });
     });
 
     // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/home', // redirect to the secure profile section
-        failureRedirect: '/signup', // redirect back to the signup page if there is an error
+        failureRedirect: '/', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
@@ -99,7 +102,9 @@ module.exports = function (app, passport) {
         .get(function (req, res) {
 
             // render the page and pass in any flash data if it exists
-            res.render('login.ejs', {message: req.flash('loginMessage')});
+            res.render('login.ejs', {
+                message: req.flash('loginMessage')
+            });
         })
 
         // process the login form
