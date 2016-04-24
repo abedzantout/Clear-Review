@@ -2,7 +2,7 @@
 
 <!-- Page styles -->
 <link rel="stylesheet" href="stylesheets/libraries/material.css">
-<link rel="stylesheet" type="text/css" href="stylesheets/welcome-screen/cr-dialog-polyfill.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/libraries/cr-dialog-polyfill.css">
 <link rel="stylesheet" href="stylesheets/welcome-screen/cr-welcome-screen-style.css">
 <!-- End of styles-->
 
@@ -25,14 +25,6 @@
                 <nav class="android-navigation mdl-navigation">
 
 
-
-                    <!-- for testing -->
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect MyNavButtons" id="show-dialog-CourseProfile">
-                        <a href="/login">Course Profile </a>
-                    </button>
-                    <!-- end of testing-->
-
-
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect MyNavButtons" id="show-dialog-Signin">
                         <a href="/login">Sign In </a>
                     </button>
@@ -48,10 +40,6 @@
 
         </div>
     </div>
-
-    <!-- DIALOGS FOR COURSE PROFILE -->
-   <% include course/CourseProfileDetails.ejs%>
-
 
 
     <!-- HERE ARE THE DIALOGS FOR SIGNIN AND SIGN UP -->
@@ -223,7 +211,7 @@
 
 </body>
 <script src="javascripts/libraries/material.js"></script>
-<script src="javascripts/welcome-screen/cr-dialog-polyfill.js"></script>
+<script src="javascripts/libraries/cr-dialog-polyfill.js"></script>
 <script src="javascripts/welcome-screen/cr-registration-form.js"></script>
 <script src="javascripts/search-bar/search.js"></script>
 

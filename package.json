@@ -6,6 +6,7 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "angular": "^1.5.5",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",
     "connect-flash": "^0.1.1",
@@ -20,6 +21,7 @@
     "nodemon": "^1.9.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "regex": "^0.1.1",
     "serve-favicon": "~2.3.0"
   }
 }

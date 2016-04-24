@@ -4,6 +4,7 @@
     margin-left: auto;
     box-shadow: none;
     width: 1500px;
+    border:none;
 }
 .CourseProfileHeader{
     width: 65%;
@@ -16,6 +17,8 @@
 
 .ProfileBox{
     height: 800px;
+    padding-left:2%;
+    padding-right: 2%;
 
 }
 .CheckBoxDescription{

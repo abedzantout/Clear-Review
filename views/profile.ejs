@@ -5,6 +5,7 @@
 	<title>Node Authentication</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
 	<style>
 		body 		{ padding-top:80px; word-wrap:break-word; }
 	</style>
@@ -34,6 +35,58 @@
 			</div>
 
 		</div>
+
+
+
+		<!-- Code for course profile begins here -->
+		<link rel="stylesheet" href="stylesheets/libraries/material.css">
+		<link rel="stylesheet" href="stylesheets/homepageStyles.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/libraries/cr-dialog-polyfill.css">
+		<script src="javascripts/libraries/material.js"></script>
+		<script src="javascripts/libraries/cr-dialog-polyfill.js"></script>
+		<script src="javascripts/Home/cr-home-cards.js"></script>
+
+
+		<% include course/CourseProfileDetails.ejs%>
+		<% include professor/ProfessorProfile.ejs%>
+
+		<div class="demo-card-square mdl-card mdl-shadow--2dp">
+			<div class="mdl-card__title mdl-card--expand">
+				<h2 class="mdl-card__title-text">CMPS 253</h2>
+			</div>
+			<div class="mdl-card__supporting-text">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons CourseCard">
+					<a href="/login">View</a>
+				</button>
+			</div>
+		</div>
+
+
+
+
+			<div class="demo-card-square mdl-card mdl-shadow--2dp">
+				<div class="mdl-card__title mdl-card--expand">
+					<h2 class="mdl-card__title-text">Mahmoud Bdeir</h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ProfessorCard">
+						<a href="/login">View</a>
+					</button>
+				</div>
+			</div>
+
+
+
+
+
+
+		<!-- Code for course profile ends here -->
 	</div>
 </div>
 </body>

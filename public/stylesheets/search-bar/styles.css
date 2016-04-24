@@ -14,7 +14,7 @@
     font-size: 24px;
     height: 30px;
     line-height: 30px;
-    width: 500px;
+    width: 100%;
     max-width: 900px;
 }
 
@@ -33,6 +33,7 @@
 .twitter-typeahead {
     width: inherit;
     z-index: 10000000000;
+    width:100%;
 }
 .tt-dropdown-menu {
     background-color: #FFFFFF;
