@@ -67,12 +67,9 @@
 
                     var arr = Object.keys(data).map(function (k) {
                                 return data[k]
-                            }
-                    );
+                            });
                     //This is the script to dynamically create the cards.
                     for (var i = 0; i < arr[0].length; i++) {
-                        for (var j = 0; j < arr[1]; j++) {
-                        }
                         var containingDiv = document.getElementsByClassName("ProfessorCardHolder")[0];
                         var span = document.createElement("div");
                         span.className = "tab";
@@ -101,21 +98,12 @@
                     }
                 });
             </script>
-
-
         </section>
-
     </div>
     <div class="mdl-layout__tab-panel" id="myCourses">
         <section class="mdl-layout mdl-grid mdl-grid--no-spacing MyCoursesHolder" id="innerMyCourses">
-            <%
-            //This is the input array which takes values from node Express
-            MyCourses = ['CMPS 253', 'CMPS 258', 'CMPS 212', 'CMPS 257', 'CMPS 200', 'CMPS 278'];
-            //CRNs = ['12345','23456','34567','45678','56789','67890'];
-            %>
+
             <div id="registrationRules">
-
-
                 <h5 id="WarningMessage" style="color:red ;display: none"></h5>
                 <h5>
                     Type in the AUB-assigned CRN for the course you are currently taking, then click the 'ADD COURSE'
@@ -276,7 +264,6 @@
                         for (var i = 0; i < delButtons.length; i++) {
                             delButtons[i].addEventListener('click', DeleteCourse);
                         }
-
 
                         //var CourseDelBtn = document.getE
                     }
