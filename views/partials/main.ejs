@@ -13,7 +13,6 @@
             Courses = ['CMPS 253', 'CMPS 258', 'CMPS 212', 'CMPS 257', 'CMPS 200'];
             %>
             <script>
-                var connectedArray = {};
                 var socket = io();
 
                 socket.on('courses', function (data) {

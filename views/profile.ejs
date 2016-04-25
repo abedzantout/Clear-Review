@@ -11,16 +11,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/0.3.7/awesome-bootstrap-checkbox.css">
-    <link rel="stylesheet" href="../../src/jquery.typeahead.css">
+    <link rel="stylesheet" href="stylesheets/libraries/jquery.typeahead.css">
     <link rel="stylesheet" href="game_v3.css">
 
     <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.js"></script>
 
     <script src="javascripts/libraries/jquery.typeahead.js"></script>
-
-
-
 
     <style>
 
@@ -138,18 +135,6 @@
 <div style="width: 100%; max-width: 1000px; margin: 0 auto;">
 
     <h1>Game_v3 Demo</h1>
-
-    <ul>
-        <li>
-            <a href="http://www.runningcoder.org/jquerytypeahead/documentation/">Documentation</a>
-        </li>
-        <li>
-            <a href="http://www.runningcoder.org/jquerytypeahead/demo/">Demos</a>
-        </li>
-        <li>
-            Edit this demo on <a href="https://jsfiddle.net/runningcoder/14epn93f/">JsFiddle</a>
-        </li>
-    </ul>
 
     <div class="champion-filters">
         <ul>
@@ -445,6 +430,20 @@
             }
         });
 
+
+        var socket = io();
+
+        socket.on('courses', function (data) {
+            var arr = Object.keys(data).map(function(k) {
+                return data[k]
+            });
+            console.log('testing: ', arr[0][1].length );
+        });
+
+
+
+
+
         var classification = {
             male: [
                 'Tryndamere', 'Gragas', 'Ryze', 'Olaf', 'Viktor', 'Garen', 'Singed', 'Zed',
@@ -465,7 +464,6 @@
                 'Trundle', 'Kassadin', 'Velkoz', 'Aatrox', 'Thresh', 'Sion', 'Nautilus'
             ]
         };
-
         $('#clear-champion-filters').on('click', function () {
 
             // Visually reset filters
