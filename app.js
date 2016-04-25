@@ -14,7 +14,7 @@ var home            = require('./routes/home');
 var mysql           = require('mysql');
 var helmet          = require('helmet');
 //var app = require('../app');
-var app = express();
+var app             = express();
 
 
 /**
