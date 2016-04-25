@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="stylesheets/libraries/jquery.typeahead.css">
     <link rel="stylesheet" href="game_v3.css">
 
-    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.js"></script>
-
     <script src="javascripts/libraries/jquery.typeahead.js"></script>
 
     <style>
@@ -136,103 +136,6 @@
 
     <h1>Game_v3 Demo</h1>
 
-    <div class="champion-filters">
-        <ul>
-            <li>Role:</li>
-            <li>
-                <div class="checkbox checkbox-info">
-                    <input type="checkbox" id="assassin">
-                    <label for="assassin">
-                        assassin
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox checkbox-info">
-                    <input type="checkbox" id="fighter">
-                    <label for="fighter">
-                        fighter
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox checkbox-info">
-                    <input type="checkbox" id="mage">
-                    <label for="mage">
-                        mage
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox checkbox-info">
-                    <input type="checkbox" id="support">
-                    <label for="support">
-                        support
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox checkbox-info">
-                    <input type="checkbox" id="tank">
-                    <label for="tank">
-                        tank
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox checkbox-info">
-                    <input type="checkbox" id="marksman">
-                    <label for="marksman">
-                        marksman
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div class="checkbox checkbox-info">
-                    <input type="checkbox" id="attack-10" value="10">
-                    <label for="attack-10">
-                        Attack 10
-                    </label>
-                </div>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                Classification:
-            </li>
-            <li>
-                <div class="radio radio-info radio-inline">
-                    <input type="radio" id="classification-any" value="" name="champion-classification" checked="">
-                    <label for="classification-any"> Any </label>
-                </div>
-            </li>
-            <li>
-                <div class="radio radio-info radio-inline">
-                    <input type="radio" id="classification-male" value="male" name="champion-classification">
-                    <label for="classification-male"> Male </label>
-                </div>
-            </li>
-            <li>
-                <div class="radio radio-info radio-inline">
-                    <input type="radio" id="classification-female" value="female" name="champion-classification">
-                    <label for="classification-female"> Female </label>
-                </div>
-            </li>
-            <li>
-                <div class="radio radio-info radio-inline">
-                    <input type="radio" id="classification-creature" value="creature" name="champion-classification">
-                    <label for="classification-creature"> Creature </label>
-                </div>
-
-            </li>
-
-            <li>
-                <div class="ui mini button clear-filters" id="clear-champion-filters">Clear Filters
-                </div>
-            </li>
-        </ul>
-
-    </div>
     <div class="champion-form-container">
 
         <form id="form-game_v3" name="form-game_v3">
@@ -310,31 +213,6 @@
             cache: true,
             ttl: 3600000 * 24 * 7, // 1 week
             compression: true,
-            dynamicFilter: [{
-                selector: '#assassin',
-                key: '|tags.Assassin'
-            }, {
-                selector: '#fighter',
-                key: '|tags.Fighter'
-            }, {
-                selector: '#mage',
-                key: '|tags.Mage'
-            }, {
-                selector: '#support',
-                key: '|tags.Support'
-            }, {
-                selector: '#tank',
-                key: '|tags.Tank'
-            }, {
-                selector: '#marksman',
-                key: '|tags.Marksman'
-            }, {
-                selector: '[name="champion-classification"]',
-                key: '&classification'
-            }, {
-                selector: '#attack-10',
-                key: '&info.attack'
-            }],
             display: ["key", "name"],
             template: '<span class="champion-image">' +
             '<img src="//ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/{{image.full}}" alt="{{name}} {{title}}">' +
@@ -437,11 +315,8 @@
             var arr = Object.keys(data).map(function(k) {
                 return data[k]
             });
-            console.log('testing: ', arr[0][1].length );
+            console.log('testing: ', arr[0].male);
         });
-
-
-
 
 
         var classification = {

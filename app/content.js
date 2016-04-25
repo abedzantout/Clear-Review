@@ -32,7 +32,7 @@ module.exports = function(app, connection, io) {
             data: classification
         });
     });
-    
+
 /*
     connection.query('SELECT email from students',  function (err, rows, fields) {
         if (err) throw err;
