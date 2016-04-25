@@ -19,6 +19,12 @@ Note: any .css or .scss files included in the 'styles' directory
 will be correctly compiled during `gulp serve` and `gulp`
  */
 
+.ProfessorCardHolder{
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+
 span.tab {
   padding: 5px;
 }
@@ -242,7 +248,7 @@ html, body {
 
 .demo-card-square > .mdl-card__title {
   color: #fff;
-  background: #303f9f bottom right 20%;
+  background: #2196F3 bottom right 20%;
   display: inline-block;
   /* url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;*/
 }

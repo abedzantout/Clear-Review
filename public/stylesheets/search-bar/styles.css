@@ -27,12 +27,12 @@
 }
 
 .tt-dataset-courses {
-    width: 500px;
+    width: 100%;
     max-width: 900px;
 }
 .twitter-typeahead {
     width: inherit;
-    z-index: 10000000000;
+    z-index: 1000;
     width:100%;
 }
 .tt-dropdown-menu {
@@ -51,7 +51,7 @@
     line-height: 24px;
     padding: 3px 20px;
     width: inherit;
-    z-index: 10000000000;
+    z-index: 1000;
 }
 
 .tt-suggestion.tt-is-under-cursor {
@@ -62,6 +62,7 @@
 .tt-suggestion p {
     margin: 0;
     color: black;
+    z-index: 10000;
 }
 
 
@@ -80,12 +81,11 @@
     outline: none;
     border: none;
     font-size: 16px;
-    border-radius: 5px 5px 5px 5px;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
     color: #222222;
     height: 40px;
-    width: 10%;
+    width: 8.5%;
 }
 .mdh-expandable-search form {
     max-width: 900px;

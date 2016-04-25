@@ -1,60 +1,58 @@
 <% include header-container %>
 
 <!-- The includes are for the course/professor Dialogs-->
-<% include ../course/CourseProfileDetails.ejs %>
-<% include ../professor/ProfessorProfile.ejs %>
+<% include ../course/CourseProfileDetails.ejs%>
+<% include ../professor/ProfessorProfile.ejs%>
 
 <main class="mdl-layout__content">
     <div class="mdl-layout__tab-panel is-active" id="courses">
         <section class="mdl-layout mdl-grid mdl-grid--no-spacing CourseCardHolder">
 
-            <%
-            //This is the input array which takes values from node Express
-            Courses = ['CMPS 253', 'CMPS 258', 'CMPS 212', 'CMPS 257', 'CMPS 200'];
-            %>
             <script>
+                var connectedArray = {};
                 var socket = io();
 
                 socket.on('courses', function (data) {
                     var arr = Object.keys(data).map(function(k) {
                         return data[k]
                     });
-                    console.log('testing: ', arr[0][1].length );
+                    console.log('testing: ', arr[0][1]);
 
-                //This is the script to dynamically create the cards.
-                for(var i = 0; i < arr[0].length; i++) {
-                    var containingDiv = document.getElementsByClassName("CourseCardHolder")[0];
-                    var span = document.createElement("div");
-                    span.className = "tab";
-                    containingDiv.appendChild(span);
-                    var outercard = document.createElement("div");
-                    outercard.className = "demo-card-square mdl-card mdl-shadow--8dp HomeCards";
-                    containingDiv.appendChild(outercard);
-                    var cardHeader = document.createElement("div");
-                    cardHeader.className = "mdl-card__title mdl-card--expand";
-                    outercard.appendChild(cardHeader);
-                    var title = document.createElement("h2");
-                    title.className = "mdl-card__title-text";
-                    title.innerHTML = arr[0][i];
-                    cardHeader.appendChild(title);
-                    var cardDescription = document.createElement("div");
-                    cardDescription.className = "mdl-card__supporting-text";
-                    cardDescription.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
-                    outercard.appendChild(cardDescription);
-                    var cardAction = document.createElement("div");
-                    cardAction.className = "mdl-card__actions mdl-card--border";
-                    outercard.appendChild(cardAction);
-                    var cardButton = document.createElement("div");
-                    cardButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons CourseCard";
-                    cardButton.innerHTML = "View";
-                    cardAction.appendChild(cardButton);
-                }
+                    //This is the script to dynamically create the cards.
+                    for(var i = 0; i < arr[0].length; i++) {
+                        var containingDiv = document.getElementsByClassName("CourseCardHolder")[0];
+                        var span = document.createElement("div");
+                        span.className = "tab";
+                        containingDiv.appendChild(span);
+                        var outercard = document.createElement("div");
+                        outercard.className = "demo-card-square mdl-card mdl-shadow--2dp HomeCards";
+                        containingDiv.appendChild(outercard);
+                        var cardHeader = document.createElement("div");
+                        cardHeader.className = "mdl-card__title mdl-card--expand";
+                        outercard.appendChild(cardHeader);
+                        var title = document.createElement("h2");
+                        title.className = "mdl-card__title-text";
+                        title.innerHTML = arr[0][i];
+                        cardHeader.appendChild(title);
+                        var cardDescription = document.createElement("div");
+                        cardDescription.className = "mdl-card__supporting-text";
+                        cardDescription.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
+                        outercard.appendChild(cardDescription);
+                        var cardAction = document.createElement("div");
+                        cardAction.className = "mdl-card__actions mdl-card--border";
+                        outercard.appendChild(cardAction);
+                        var cardButton = document.createElement("div");
+                        cardButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons CourseCard";
+                        cardButton.innerHTML = "View";
+                        cardAction.appendChild(cardButton);
+                    }
                 });
             </script>
 
             <script>
                 //TODO: to fix
-
+                var dataStr = JSON.stringify(data);
+                console.log('client: ' + dataStr);
             </script>
 
 
@@ -65,32 +63,32 @@
         <section class="mdl-layout mdl-grid mdl-grid--no-spacing ProfessorCardHolder">
             <%
             //This is the input array which takes values from node Express
-            Professors = ['Mahmoud Bdeir', 'Haidar Safa', 'Ahmad Dhaini', 'Wassim El-Hajj', 'Fatema Abu-Salem'];
+            Professors = ['Mahmoud Bdier','Haidar Safa','Ahmad Dhaini','Wassim El-Hajj','Fatema Abu-Salem'];
             %>
 
             <script>
                 //This is the script to dynamically create the cards.
-                <% for( var i = 0; i < Professors.length;i++){ %>
+                <%for( var i = 0; i < Professors.length;i++){ %>
                 var containingDiv = document.getElementsByClassName("ProfessorCardHolder")[0];
                 var span = document.createElement("div");
                 span.className = "tab";
                 containingDiv.appendChild(span);
                 var outercard = document.createElement("div");
-                outercard.className = "demo-card-square mdl-card mdl-shadow--8dp HomeCards";
+                outercard.className="demo-card-square mdl-card mdl-shadow--2dp HomeCards";
                 containingDiv.appendChild(outercard);
                 var cardHeader = document.createElement("div");
                 cardHeader.className = "mdl-card__title mdl-card--expand";
                 outercard.appendChild(cardHeader);
                 var title = document.createElement("h2");
-                title.className = "mdl-card__title-text";
-                title.innerHTML = "<%- Professors[i]; %>";
+                title.className="mdl-card__title-text";
+                title.innerHTML="<%-Professors[i];%>";
                 cardHeader.appendChild(title);
                 var cardDescription = document.createElement("div");
-                cardDescription.className = "mdl-card__supporting-text";
-                cardDescription.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
+                cardDescription.className="mdl-card__supporting-text";
+                cardDescription.innerHTML="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
                 outercard.appendChild(cardDescription);
                 var cardAction = document.createElement("div");
-                cardAction.className = "mdl-card__actions mdl-card--border";
+                cardAction.className="mdl-card__actions mdl-card--border";
                 outercard.appendChild(cardAction);
                 var cardButton = document.createElement("div");
                 cardButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ProfessorCard";
@@ -108,85 +106,198 @@
         <section class="mdl-layout mdl-grid mdl-grid--no-spacing MyCoursesHolder" id="innerMyCourses">
             <%
             //This is the input array which takes values from node Express
-            MyCourses = ['CMPS 253', 'CMPS 258', 'CMPS 212', 'CMPS 257', 'CMPS 200', 'CMPS 278'];
+            MyCourses = ['CMPS 253','CMPS 258','CMPS 212','CMPS 257','CMPS 200','CMPS 278'];
             //CRNs = ['12345','23456','34567','45678','56789','67890'];
             %>
+            <div id="registrationRules">
 
-            <div class="demo-card-square mdl-card mdl-shadow--8dp  HomeCards">
-                <div class="mdl-card__title mdl-card--expand">
-                    <h2 class="mdl-card__title-text"><i class="large material-icons">add</i></h2>
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <form action="#">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="CRN">
-                            <label class="mdl-textfield__label" for="CRN">Enter CRN</label>
-                        </div>
-                    </form>
-                    <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons"
-                            id="addCourseBtn">
-                        <a href="/login">Add Course</a>
-                    </button>
-                </div>
+
+                <h5 id="WarningMessage" style="color:red ;display: none"></h5>
+                <h5>
+                    Type in the AUB-assigned CRN for the course you are currently taking, then click the 'ADD COURSE'
+                    button to add it. You may only add up to 6 courses, or the equivalent of 19 credits. A List of the
+                    available CRNs is not provided to reduce the amount of dishonest reviews.
+                </h5>
+
             </div>
+            <div id="MyCourseSection">
 
 
-            <script>
-                var counter = 0;
-                <% var coursecounter = 0; %>
-                var MyCourses = ['CMPS 253', 'CMPS 258', 'CMPS 212', 'CMPS 257', 'CMPS 200', 'CMPS 278'];
-                var CRNs = ['12345', '23456', '34567', '45678', '56789', '67890'];
-
-                document.getElementById("addCourseBtn").onclick = function () {
-                    alert("<%= coursecounter %>");
-                    counter = document.getElementsByClassName("MyCurrentCourses").length;
-                    var containingDiv = document.getElementsByClassName("MyCoursesHolder")[0];
-                    var span = document.createElement("div");
-                    span.className = "tab";
-
-                    var outercard = document.createElement("div");
-                    outercard.className = "demo-card-square mdl-card mdl-shadow--8dp HomeCards MyCurrentCourses";
-
-                    var cardHeader = document.createElement("div");
-                    cardHeader.className = "mdl-card__title mdl-card--expand";
-
-                    var title = document.createElement("h2");
-                    title.className = "mdl-card__title-text";
-                    title.innerHTML = "<%= MyCourses[coursecounter]; %>";
-
-                    var cardDescription = document.createElement("div");
-                    cardDescription.className = "mdl-card__supporting-text";
-                    cardDescription.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
-
-                    var cardAction = document.createElement("div");
-                    cardAction.className = "mdl-card__actions mdl-card--border";
-
-                    var cardButton = document.createElement("div");
-                    cardButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ProfessorCard";
-                    cardButton.innerHTML = "View";
+                <div class="demo-card-square mdl-card mdl-shadow--2dp  HomeCards" >
+                    <div class="mdl-card__title mdl-card--expand">
+                        <h2 class="mdl-card__title-text"><i class="large material-icons">add</i></h2>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="CRNinput">
+                                <label class="mdl-textfield__label" for="CRN">Enter CRN</label>
+                            </div>
+                        </form>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons" id="addCourseBtn">
+                            <a href="/login">Add Course</a>
+                        </button>
+                    </div>
+                </div>
 
 
-                    if (counter < 6) {
-                        containingDiv.appendChild(span);
-                        containingDiv.appendChild(outercard);
-                        outercard.appendChild(cardHeader);
-                        cardHeader.appendChild(title);
-                        outercard.appendChild(cardDescription);
-                        outercard.appendChild(cardAction);
-                        cardAction.appendChild(cardButton);
+
+
+
+                <script>
+
+                    var counter = 0;
+                    var MyCourses = ['CMPS 253', 'CMPS 258', 'CMPS 212', 'CMPS 257', 'CMPS 200', 'CMPS 278'];
+                    var CRNs = ['12345', '23456', '34567', '45678', '56789', '67890'];
+                    var CurrentCourses = [];
+
+                    var inputCRN = document.getElementById("CRNinput");
+
+                    var WarningMessage = document.getElementById("WarningMessage");
+                    alert('yes');
+                    document.getElementById("addCourseBtn").onclick = function () {
+
+                        if (inputCRN.value) {
+                            if (CheckIfRegistered(inputCRN.value) && CheckIfIsACourse(inputCRN.value)) {
+                                AddCourse(inputCRN.value);
+                            }
+                            else {
+                                WarningMessage.style.display = "block";
+                                WarningMessage.innerHTML = "The course you have chosen is either already in your list or is not a course at all.";
+                            }
+                        }
+                        else {
+                            WarningMessage.style.display = "block";
+                            WarningMessage.innerHTML = "Please enter a CRN for the course you want to add.";
+                        }
+                    };
+
+
+                    function CheckIfIsACourse(crn) {
+                        for (var i = 0; i < CRNs.length; i++) {
+                            if (CRNs[i] == crn) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+
+                    function CheckIfRegistered(crn) {
+                        if (CurrentCourses.length == 0) {
+                            return true;
+                        }
+                        for (var i = 0; i < CurrentCourses.length; i++) {
+                            if (CurrentCourses[i] == crn) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+
+
+                    function AddCourse(crn) {
+                        counter = document.getElementsByClassName("MyCurrentCourses").length;
+                        var containingDiv = document.getElementById("MyCourseSection");
+                        var span = document.createElement("div");
+                        span.className = "tab";
+
+                        var outercard = document.createElement("div");
+                        outercard.className="demo-card-square mdl-card mdl-shadow--2dp HomeCards MyCurrentCourses";
+
+                        var cardHeader = document.createElement("div");
+                        cardHeader.className = "mdl-card__title mdl-card--expand";
+
+                        var title = document.createElement("h2");
+                        title.className = "mdl-card__title-text";
+                        title.innerHTML = MyCourses[CRNs.indexOf(crn)];
+
+                        var cardDescription = document.createElement("div");
+                        cardDescription.className="mdl-card__supporting-text";
+                        cardDescription.innerHTML="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
+
+                        var cardAction = document.createElement("div");
+                        cardAction.className="mdl-card__actions mdl-card--border";
+
+                        var cardButton = document.createElement("div");
+                        cardButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ProfessorCard";
+                        cardButton.innerHTML = "View";
+
+                        var cardRateButton = document.createElement("div");
+                        cardRateButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ";
+                        cardRateButton.innerHTML = "Rate";
+
+                        var cardDeleteButton = document.createElement("div");
+                        cardDeleteButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons CourseDelBtn";
+                        cardDeleteButton.innerHTML = "Delete";
+
+
+                        if (counter < 6) {
+                            containingDiv.appendChild(span);
+                            containingDiv.appendChild(outercard);
+                            outercard.appendChild(cardHeader);
+                            cardHeader.appendChild(title);
+                            outercard.appendChild(cardDescription);
+                            outercard.appendChild(cardAction);
+                            cardAction.appendChild(cardButton);
+                            cardAction.appendChild(cardRateButton);
+                            cardAction.appendChild(cardDeleteButton);
+                            CurrentCourses.push(crn);
+                            WarningMessage.style.display = "none";
+                            attachListeners();
+                            attachDelHandlers();
+                        }
+                        else {
+                            WarningMessage.style.display = "block";
+                            WarningMessage.innerHTML = "you exceeded the number of credits you are allowed to register";
+                        }
+                    }
+
+                    function attachListeners() {
+                        var dialogCourseProfile = document.getElementById("CourseProfile");
+                        var CourseProfilebutton = document.getElementsByClassName("CourseCard");
+                        for (var i = 0; i < CourseProfilebutton.length; i++) {
+                            if (!dialogCourseProfile.showModal) {
+                                dialogPolyfill.registerDialog(dialogCourseProfile);
+                            }
+                            CourseProfilebutton[i].addEventListener('click', function () {
+                                dialogCourseProfile.showModal();
+                            });
+                            dialogCourseProfile.querySelector('.close').addEventListener('click', function () {
+                                dialogCourseProfile.close();
+                            });
+                        }
+                    }
+
+
+
+
+
+
+
+
+                    function attachDelHandlers() {
+                        var delButtons = document.getElementsByClassName("CourseDelBtn");
+                        for(var i = 0; i< delButtons.length; i++){
+                            delButtons[i].addEventListener('click',DeleteCourse);
+                        }
+
+
+                        //var CourseDelBtn = document.getE
+                    }
+
+                    function DeleteCourse(){
+                        var ElementToRemove = this.parentElement.parentElement;
+                        ElementToRemove.parentElement.removeChild(ElementToRemove);
+                        var index = CurrentCourses.indexOf(ElementToRemove.getElementsByClassName("mdl-card__title-text")[0].innerHTML);
+                        alert(CurrentCourses.toString());
+                        alert(index);
+                        //The code on client side is now ready. We only need queries.
 
 
                     }
-                    else {
-
-                        alert("you exceeded the number of credits you are allowed to register");
-                    }
-                    alert("<%= coursecounter %>");
-                };
-                <%- coursecounter = coursecounter + 1; %>
 
 
-            </script>
+                </script>
 
 
         </section>

@@ -7,18 +7,22 @@
     CourseSubject = "CMPS";
     CourseNumber = "253";
     CourseCredits = "3 Cr";
-    Question1title = "Question1";
-    Question2title = "Question2";
-    Question3title = "Question3";
-    Question4title = "Question4";
-    Question5title = "Question5";
-    Question1Answers = [100,24,102];
-    Question2Answers = [200,40,98];
-    Question3Answers = [54,34,143];
-    Question4Answers = [134,123,50];
-    Question5Answers = [131,32,80];
+
+
+    Question1title = "Was the grading system was clear and fair ?";
+    Question2title = "Did this course increase your interest in the subject ?";
+    Question3title = "Have you learned something valuable to you in this course ?";
+    Question4title = "Did the instructor  maintain your interest throughout the course ?";
+    Question5title = "Would you recommend this course to other students ?";
+    Question1Answers = [100, 24, 102];
+    Question2Answers = [200, 40, 98];
+    Question3Answers = [54, 34, 143];
+    Question4Answers = [134, 123, 50];
+    Question5Answers = [131, 32, 80];
     TotalVoters = 0;
-    for(var i in Question1Answers) { TotalVoters += Question1Answers[i]; }
+    for (var i in Question1Answers) {
+        TotalVoters += Question1Answers[i];
+    }
     %>
 
     <div class="CourseProfileHeader ProfileBox">
@@ -27,9 +31,9 @@
         </div>
         </br>
         <h5 class="mdl-dialog__content">
-            <%= CourseSubject + " " + CourseNumber%>
+            <%= CourseSubject + " " + CourseNumber %>
         </h5>
-        <h4 class="mdl-dialog__title"><%= CourseTitle + " - " + CourseCredits%></h4>
+        <h4 class="mdl-dialog__title"><%= CourseTitle + " - " + CourseCredits %></h4>
 
 
         <p class="ResultsDescription">
@@ -51,49 +55,65 @@
             </p>
             <section id="CheckboxSection">
 
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                       for="checkbox-1">
-                    <input onclick="addData(this);" value="<%= Question1Answers[0]%>,<%= Question1Answers[1]%>,<%= Question1Answers[2]%>" type="checkbox"
-                           id="checkbox-1"
-                           class="mdl-checkbox__input"/>
-                    <span class="mdl-checkbox__label"><%= Question1title %></span>
-                </label>
 
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                       for="checkbox-2">
-                    <input onclick="addData(this);" value="<%= Question2Answers[0]%>,<%= Question2Answers[1]%>,<%= Question2Answers[2]%>" type="checkbox"
-                           id="checkbox-2"
-                           class="mdl-checkbox__input"/>
-                    <span class="mdl-checkbox__label"><%= Question2title %></span>
-                </label>
+                <table class="OptionsTable">
+                    <tr>
+                        <td>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                   for="checkbox-1">
+                                <input onclick="addData(this);"
+                                       value="<%= Question1Answers[0] %>,<%= Question1Answers[1] %>,<%= Question1Answers[2] %>"
+                                       type="checkbox" id="checkbox-1"
+                                       class="mdl-checkbox__input"/><%= Question1title %>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+                                <input onclick="addData(this);"
+                                       value="<%= Question2Answers[0] %>,<%= Question2Answers[1] %>,<%= Question2Answers[2] %>"
+                                       type="checkbox" id="checkbox-2"
+                                       class="mdl-checkbox__input"/><%= Question2title %>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-3">
+                                <input onclick="addData(this);"
+                                       value="<%= Question3Answers[0] %>,<%= Question3Answers[1] %>,<%= Question3Answers[2] %>"
+                                       type="checkbox" id="checkbox-3"
+                                       class="mdl-checkbox__input"/><%= Question3title %>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-4">
+                                <input onclick="addData(this);"
+                                       value="<%= Question4Answers[0] %>,<%= Question4Answers[1] %>,<%= Question4Answers[2] %>"
+                                       type="checkbox" id="checkbox-4"
+                                       class="mdl-checkbox__input"/><%= Question4title %>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-5">
+                                <input onclick="addData(this);"
+                                       value="<%= Question5Answers[0] %>,<%= Question5Answers[1] %>,<%= Question5Answers[2] %>"
+                                       type="checkbox" id="checkbox-5"
+                                       class="mdl-checkbox__input"/><%= Question5title %>
+                            </label>
+                        </td>
+                    </tr>
 
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                       for="checkbox-3">
-                    <input onclick="addData(this);" value="<%= Question3Answers[0]%>,<%= Question3Answers[1]%>,<%= Question3Answers[2]%>" type="checkbox"
-                           id="checkbox-3"
-                           class="mdl-checkbox__input"/>
-                    <span class="mdl-checkbox__label"><%= Question3title %></span>
-                </label>
-
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                       for="checkbox-4">
-                    <input onclick="addData(this);" value="<%= Question4Answers[0]%>,<%= Question4Answers[1]%>,<%= Question4Answers[2]%>" type="checkbox"
-                           id="checkbox-4"
-                           class="mdl-checkbox__input"/>
-                    <span class="mdl-checkbox__label"><%= Question4title %></span>
-                </label>
-
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                       for="checkbox-5">
-                    <input onclick="addData(this);" value="<%= Question5Answers[0]%>,<%= Question5Answers[1]%>,<%= Question5Answers[2]%>" type="checkbox"
-                           id="checkbox-5"
-                           class="mdl-checkbox__input"/>
-                    <span class="mdl-checkbox__label"><%= Question5title %></span>
-                </label>
+                </table>
             </section>
         </div>
         <p class="CheckBoxDescription">
-            Total number of voters so far: <%= TotalVoters%>
+            Total number of voters so far: <%= TotalVoters %>
         </p>
 
     </div>

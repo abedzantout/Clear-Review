@@ -2,12 +2,13 @@ var app = require('express');
 var router = app.Router();
 var url = require('url');
 module.exports = function(app, connection, io) {
-    connection.query('SELECT email from students',  function (err, rows, fields) {
+    connection.query('SELECT title from course',  function (err, rows, fields) {
         if (err) throw err;
         var data = [];
-        for (i = 0; i < rows.length; i++) {
-            data.push(rows[i].email);
+        for (var i = 0; i < rows.length; i++) {
+            data.push(rows[i].title);
         }
+        console.log(data);
         io.on('connection', function (socket) {
             socket.emit('courses', {
                 data: data

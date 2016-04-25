@@ -36,6 +36,7 @@
 .ProfileBox{
     height: 800px;
     padding-left:2%;
+    overflow: auto;
 }
 
 .ResultsDescription{

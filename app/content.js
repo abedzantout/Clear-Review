@@ -33,8 +33,7 @@ module.exports = function(app, connection, io) {
         });
     });
 
-/*
-    connection.query('SELECT email from students',  function (err, rows, fields) {
+/*connection.query('SELECT email from students',  function (err, rows, fields) {
         if (err) throw err;
         var data = [];
         for (i = 0; i < rows.length; i++) {
