@@ -6,10 +6,9 @@ var connection = mysql.createConnection(dbconfig.connection);
 connection.query('CREATE DATABASE ' + dbconfig.database);
 connection.query('USE '+ dbconfig.database);
 
-connection.query('\
-drop table if exists `ANSWER`; \
-drop table if exists `ANSWERTYPE`; \
-drop table if exists `COURSE`; \
+connection.query('drop table if exists `ANSWER`');
+connection.query('drop table if exists `ANSWERTYPE`');
+'drop table if exists `COURSE`; \
 drop table if exists `COURSEINSTANCE`; \
 drop table if exists `ENROLL`; \
 drop table if exists `FACULTY`; \

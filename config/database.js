@@ -8,6 +8,6 @@ module.exports = {
         'user': 'root',
         'password': 'mysql'
     },
-    'database': 'my_db',
+    'database': 'clearreview',
     'users_table': 'students'
 };
