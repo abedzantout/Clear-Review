@@ -1,41 +1,490 @@
 <!doctype html>
-<html>
+
+<html lang="en">
 <head>
-    <title>Socket.IO chat</title>
+    <meta charset="utf-8">
+
+    <title>Typeahead Game_v3 Demo</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/0.3.7/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="../../src/jquery.typeahead.css">
+    <link rel="stylesheet" href="game_v3.css">
+
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.js"></script>
+
+    <script src="javascripts/libraries/jquery.typeahead.js"></script>
+
+
+
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font: 13px Helvetica, Arial; }
-        form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-        #messages { list-style-type: none; margin: 0; padding: 0; }
-        #messages li { padding: 5px 10px; }
-        #messages li:nth-child(odd) { background: #eee; }
+
+        #form-game_v3 {
+            width: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .tab-content.champion {
+            overflow: inherit;
+        }
+
+        .champion-form-container {
+            position: relative;
+        }
+
+        #champion-list {
+            position: relative;
+            z-index: 1;
+        }
+
+        #champion-list .typeahead__list {
+            padding: 0;
+        }
+
+        #champion-list .typeahead__list:not(.empty) > li {
+            border-left: 1px solid #fff;
+            border-top: 1px solid #fff;
+            border-right: 1px solid #d7d7d7;
+            border-bottom: 1px solid #d7d7d7;
+            background-color: #efefef;
+            padding: 5px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        #champion-list .typeahead__list > li > a {
+            padding: 6px 10px;
+        }
+
+        #champion-list .champion-image {
+            display: block;
+        }
+
+        #champion-list .champion-image img {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        #champion-list .champion-name {
+            font-size: 13px;
+        }
+
+        #champion-modal em {
+            font-style: italic;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .champion-counter {
+            font-size: 12px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .champion-filters .checkbox input[type=radio]:checked+label::after,
+        .champion-filters .checkbox input[type=checkbox]:checked+label::after {
+            font-family: Icons;
+            content: "\f00c";
+        }
+
+        .champion-filters {
+            margin-bottom: 20px;
+            position: relative;
+            width: 100%;
+            list-style: none;
+            font-size: 13px;
+            text-align: left;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 2px;
+            background-clip: padding-box;
+        }
+
+        .champion-filters > ul {
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .champion-filters > ul > li {
+            display: inline-block;
+            padding-right: 30px;
+        }
+
+        .champion-filters label {
+            cursor: pointer;
+        }
+
+        .popup ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
     </style>
+
+
+
+
 </head>
 <body>
-<ul id="messages"></ul>
-<form action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
-</form>
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+<div style="width: 100%; max-width: 1000px; margin: 0 auto;">
+
+    <h1>Game_v3 Demo</h1>
+
+    <ul>
+        <li>
+            <a href="http://www.runningcoder.org/jquerytypeahead/documentation/">Documentation</a>
+        </li>
+        <li>
+            <a href="http://www.runningcoder.org/jquerytypeahead/demo/">Demos</a>
+        </li>
+        <li>
+            Edit this demo on <a href="https://jsfiddle.net/runningcoder/14epn93f/">JsFiddle</a>
+        </li>
+    </ul>
+
+    <div class="champion-filters">
+        <ul>
+            <li>Role:</li>
+            <li>
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" id="assassin">
+                    <label for="assassin">
+                        assassin
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" id="fighter">
+                    <label for="fighter">
+                        fighter
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" id="mage">
+                    <label for="mage">
+                        mage
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" id="support">
+                    <label for="support">
+                        support
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" id="tank">
+                    <label for="tank">
+                        tank
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" id="marksman">
+                    <label for="marksman">
+                        marksman
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox checkbox-info">
+                    <input type="checkbox" id="attack-10" value="10">
+                    <label for="attack-10">
+                        Attack 10
+                    </label>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                Classification:
+            </li>
+            <li>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" id="classification-any" value="" name="champion-classification" checked="">
+                    <label for="classification-any"> Any </label>
+                </div>
+            </li>
+            <li>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" id="classification-male" value="male" name="champion-classification">
+                    <label for="classification-male"> Male </label>
+                </div>
+            </li>
+            <li>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" id="classification-female" value="female" name="champion-classification">
+                    <label for="classification-female"> Female </label>
+                </div>
+            </li>
+            <li>
+                <div class="radio radio-info radio-inline">
+                    <input type="radio" id="classification-creature" value="creature" name="champion-classification">
+                    <label for="classification-creature"> Creature </label>
+                </div>
+
+            </li>
+
+            <li>
+                <div class="ui mini button clear-filters" id="clear-champion-filters">Clear Filters
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <div class="champion-form-container">
+
+        <form id="form-game_v3" name="form-game_v3">
+            <div class="typeahead__container">
+                <div class="typeahead__field">
+
+                    <span class="typeahead__query">
+                        <input class="js-typeahead-input"
+                               name="game_v3[query]"
+                               type="search"
+                               placeholder="Search"
+                               autocomplete="off">
+                    </span>
+                    <span class="typeahead__button">
+                        <button type="submit">
+                            <i class="typeahead__search-icon"></i>
+                        </button>
+                    </span>
+
+                </div>
+            </div>
+        </form>
+
+        <div id="champion-counter" class="champion-counter"></div>
+    </div>
+
+    <div id="champion-list" class="typeahead__result champion-list detached loading"></div>
+
+    <div id="champion-modal"
+         class="ui modal">
+        <i class="close icon"></i>
+
+        <div class="image content">
+            <div class="ui medium image">
+                <img data-champion-image src=""
+                     alt="league of legends">
+            </div>
+            <div class="description">
+                <div class="ui header" data-champion-name></div>
+                <em data-champion-title></em>
+
+                <p data-champion-blurb></p>
+            </div>
+
+        </div>
+        <div class="content">
+            <div class="ui header">Stats</div>
+            ...
+            <div class="ui header">Video</div>
+            ...
+            <div class="ui header">Skills</div>
+            ...
+        </div>
+        <div class="actions">
+            <div class="ui positive right labeled icon button">
+                Ok !
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    //TODO: to fix
-    var socket = io();
-    socket.on('news', function (data) {
-        var arr = Object.keys(data).map(function(k) {
-            return data[k]
+
+    $(function () {
+
+        typeof $.typeahead === 'function' && $.typeahead({
+            input: ".js-typeahead-input",
+            minLength: 0,
+            maxItem: 0,
+            order: "asc",
+            hint: true,
+            resultContainer: '#champion-list',
+            generateOnLoad: true,
+            cache: true,
+            ttl: 3600000 * 24 * 7, // 1 week
+            compression: true,
+            dynamicFilter: [{
+                selector: '#assassin',
+                key: '|tags.Assassin'
+            }, {
+                selector: '#fighter',
+                key: '|tags.Fighter'
+            }, {
+                selector: '#mage',
+                key: '|tags.Mage'
+            }, {
+                selector: '#support',
+                key: '|tags.Support'
+            }, {
+                selector: '#tank',
+                key: '|tags.Tank'
+            }, {
+                selector: '#marksman',
+                key: '|tags.Marksman'
+            }, {
+                selector: '[name="champion-classification"]',
+                key: '&classification'
+            }, {
+                selector: '#attack-10',
+                key: '&info.attack'
+            }],
+            display: ["key", "name"],
+            template: '<span class="champion-image">' +
+            '<img src="//ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/{{image.full}}" alt="{{name}} {{title}}">' +
+            '</span>' +
+            '<span class="champion-name">{{name}}</span>',
+            emptyTemplate: function (query) {
+                return 'No champion found' + ((query) ? ' matching "' + query + '"' : '');
+            },
+            source: {
+                champion: {
+                    url: [
+                        {
+                            url: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion",
+                            dataType: "json",
+                            data: {
+                                champData: 'info,tags,image,blurb',
+                                api_key: '4a9e144c-33b6-4283-98a8-378e0d58b8ab'
+                            },
+                            callback: {
+                                done: function (data) {
+                                    if (!(data instanceof Array)) {
+                                        data = $.map(data.data, function (value, index) {
+                                            for (var type in classification) {
+                                                if (!classification.hasOwnProperty(type)) continue;
+                                                if (~classification[type].indexOf(value.key)) {
+                                                    value.classification = type;
+                                                    break;
+                                                }
+                                            }
+                                            var tags = {};
+                                            for (var i = 0; i < value.tags.length; i++) {
+                                                tags[value.tags[i]] = true;
+                                            }
+                                            value.tags = tags;
+
+                                            return value;
+                                        });
+                                    }
+                                    return data;
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            callback: {
+                onReady: function (node) {
+                    $('#launch-game-v3-demo').addClass('hidden');
+                    $('#game-v3-demo-container').removeClass('hidden');
+                },
+                onResult: function (node, query, result, resultCount) {
+                    $('#champion-counter').text(resultCount + ' champions');
+                },
+                onClickBefore: function (node, a, item, event) {
+
+                    event.preventDefault();
+
+                    $('#champion-modal [data-champion-image]').attr({
+                        'src': '//ddragon.leagueoflegends.com/cdn/5.13.1/img/champion/' + item.image.full,
+                        'alt': 'league of legends champion ' + item.name
+                    });
+                    $('#champion-modal [data-champion-name]').text(item.name)
+                    $('#champion-modal [data-champion-title]').text(item.title)
+                    $('#champion-modal [data-champion-blurb]').text(item.blurb)
+
+                    $('#champion-modal').modal('show');
+
+                },
+                onLayoutBuiltBefore: function (node, query, result, resultHtmlList) {
+
+                    var roles;
+                    for (var i = 0; i < result.length; i++) {
+                        roles = [];
+
+                        for (role in result[i].tags) {
+                            if (!result[i].tags.hasOwnProperty(role)) continue;
+                            roles.push(role);
+                        }
+
+                        resultHtmlList.find('li:eq(' + i + ')').popup({
+                            position: "left center",
+                            html: "<ul>" +
+                            "<li>Role(s): " + roles.join(", ") + "</li>" +
+                            "<li>Classification: " + result[i].classification + "</li>" +
+                            "<li>Difficulty: " + result[i].info.difficulty + "</li>" +
+                            "</ul>"
+                        });
+
+                    }
+                    return resultHtmlList;
+
+                }
+            }
         });
 
-        //socket.emit('my other event', {my: 'data'});
-        //var o = {"0":"1","1":"2","2":"3","3":"4"};
-        //var arrr = Object.keys(o).map(function(k) { return o[k] });
-        console.log('testing: ', arr);
+        var classification = {
+            male: [
+                'Tryndamere', 'Gragas', 'Ryze', 'Olaf', 'Viktor', 'Garen', 'Singed', 'Zed',
+                'Darius', 'Vayne', 'Varus', 'Jayce', 'Pantheon', 'Corki', 'Azir', 'Graves', 'Malzahar', 'Kayle', 'LeeSin', 'Nunu',
+                'TwistedFate', 'Jax', 'Vladimir', 'Quinn', 'Lucian', 'Yasuo', 'Draven', 'Swain', 'Talon', 'Ekko', 'Zilean', 'Braum',
+                'XinZhao', 'MasterYi', 'Taric', 'Gangplank', 'JarvanIV', 'Ezreal', 'Udyr'
+            ],
+            female: [
+                'Cassiopeia', 'Poppy', 'Annie', 'Karma', 'Lux', 'Ahri', 'Lissandra', 'Morgana', 'Evelynn', 'Sona', 'Katarina',
+                'Lulu', 'Ashe', 'Leona', 'Syndra', 'Riven', 'Caitlyn', 'Nidalee', 'Vi', 'Irelia', 'Elise', 'Shyvana', 'Kalista',
+                'Diana', 'Sejuani', 'Akali', 'Sivir', 'Janna', 'Orianna', 'Fiora', 'Leblanc', 'Jinx', 'MissFortune', 'Zyra', 'Nami'
+            ],
+            creature: [
+                'Anivia', 'Maokai', 'Fizz', 'Heimerdinger', 'Rumble', 'Mordekaiser', 'KogMaw', 'Karthus', 'Alistar', 'Khazix',
+                'Galio', 'Kennen', 'Veigar', 'Bard', 'Gnar', 'Volibear', 'DrMundo', 'Brand', 'Zac', 'RekSai', 'Tristana', 'Hecarim',
+                'Rengar', 'Warwick', 'Skarner', 'Malphite', 'Xerath', 'Teemo', 'Nasus', 'Renekton', 'Shaco', 'Ziggs', 'FiddleSticks',
+                'Rammus', 'Chogath', 'Soraka', 'Nocturne', 'Yorick', 'Urgot', 'MonkeyKing', 'Blitzcrank', 'Shen', 'Twitch', 'Amumu',
+                'Trundle', 'Kassadin', 'Velkoz', 'Aatrox', 'Thresh', 'Sion', 'Nautilus'
+            ]
+        };
+
+        $('#clear-champion-filters').on('click', function () {
+
+            // Visually reset filters
+            $('.champion-filters select').find('option').prop("selected", false);
+            $('.champion-filters input[type="checkbox"]').prop("checked", false);
+            $('.champion-filters input[type="radio"]').prop("checked", false).first().prop("checked", true);
+
+            // Clear dynamic filters inside Typeahead "game_v3-query" instance, at this point you know what you are doing.
+            Typeahead['#game_v3-query'].filters.dynamic = {};
+
+            // Trigger a manual search
+            $('#game_v3-query').trigger('input.typeahead');
+
+        });
+
     });
 
 
-
 </script>
+
 </body>
 </html>
