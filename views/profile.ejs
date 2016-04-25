@@ -24,9 +24,18 @@
     //TODO: to fix
     var socket = io();
     socket.on('news', function (data) {
-        console.log('testing: ', JSON.stringify(data));
+        var arr = Object.keys(data).map(function(k) {
+            return data[k]
+        });
+
         //socket.emit('my other event', {my: 'data'});
+        //var o = {"0":"1","1":"2","2":"3","3":"4"};
+        //var arrr = Object.keys(o).map(function(k) { return o[k] });
+        console.log('testing: ', arr);
     });
+
+
+
 </script>
 </body>
 </html>
