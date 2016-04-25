@@ -46,10 +46,10 @@
             </script>
 
             <script>
-
-                var socket = io.connect('http://localhost:3000/search?key=%QUERY');
+                //TODO: to fix
+                var socket = io();
                 socket.on('news', function (data) {
-                    console.log('testing: ' + data);
+                    console.log('testing: ', data);
                     //socket.emit('my other event', {my: 'data'});
                 });
             </script>

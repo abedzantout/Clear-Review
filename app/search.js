@@ -23,17 +23,15 @@ module.exports = function (app, connection, io) {
                     data.push(rows[i].email);
                 }
                 res.send(data);
-                io.on('connection', function(socket){
-                    socket.emit('news', {
-                        data: 'world'
-                    });
-                });
-                var queryData = url.parse(req.url, true).query;
-                console.log(JSON.stringify(queryData.key));
 
-                // console.log(JSON.stringify(data)) //TODO: to extract info from -- DONE
-                // console.log(JSON.stringify(queryData.key));
+
             });
+        var queryData = url.parse(req.url, true).query;
+        console.log(JSON.stringify(queryData.key));
+
+        // console.log(JSON.stringify(data)) //TODO: to extract info from -- DONE
+        // console.log(JSON.stringify(queryData.key));
+        
     });
 
     return router;
