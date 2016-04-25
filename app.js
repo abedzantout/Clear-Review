@@ -101,11 +101,10 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // routes ======================================================================
-//require('./app/cr-auth-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-require('./app/cr-auth-routes')(app, passport);
+require('./app/cr-auth-routes')(app, passport);// load our routes and pass in our app and fully configured passport
 require('./app/search.js')(app, connection, io);
 require('./routes/home.js')(app, connection, io);
-require('./app/content.js')(app, connection ,io);
+//require('./app/content.js')(app, connection ,io);
 
 
 // catch 404 and forward to error handler

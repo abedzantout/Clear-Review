@@ -169,10 +169,7 @@
         <i class="close icon"></i>
 
         <div class="image content">
-            <div class="ui medium image">
-                <img data-champion-image src=""
-                     alt="league of legends">
-            </div>
+
             <div class="description">
                 <div class="ui header" data-champion-name></div>
                 <em data-champion-title></em>
@@ -270,10 +267,6 @@
 
                     event.preventDefault();
 
-                    $('#champion-modal [data-champion-image]').attr({
-                        'src': '//ddragon.leagueoflegends.com/cdn/5.13.1/img/champion/' + item.image.full,
-                        'alt': 'league of legends champion ' + item.name
-                    });
                     $('#champion-modal [data-champion-name]').text(item.name)
                     $('#champion-modal [data-champion-title]').text(item.title)
                     $('#champion-modal [data-champion-blurb]').text(item.blurb)
