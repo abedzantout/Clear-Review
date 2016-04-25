@@ -15,16 +15,14 @@ module.exports = function (app, connection, io) {
     // });
 
     app.get('/search', function (req, res) {
-        connection.query('SELECT * from students where email like "%' + req.query.key + '%"',
+        connection.query('SELECT title from course where title like "%' + req.query.key + '%"',
             function (err, rows, fields) {
                 if (err) throw err;
                 var data = [];
                 for (i = 0; i < rows.length; i++) {
-                    data.push(rows[i].email);
+                    data.push(rows[i].title);
                 }
                 res.send(data);
-
-
             });
         var queryData = url.parse(req.url, true).query;
         console.log(JSON.stringify(queryData.key));
