@@ -3,10 +3,11 @@
 //make sure tailor these specifications to your machine
 module.exports = {
     'connection': {
+        
         'host': 'localhost',
         'user': 'root',
         'password': 'mysql'
     },
-    'database': 'clearreview',
+    'database': 'my_db',
     'users_table': 'students'
 };
