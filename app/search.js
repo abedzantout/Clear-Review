@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 var url = require('url');
 
+
+/**
+ * expose this function to our app using module.exports
+ * @param app
+ * @param connection
+ * @param io
+ * @returns router responsible of displaying result in search bar
+ */
 module.exports = function (app, connection, io) {
 
 
@@ -26,10 +34,6 @@ module.exports = function (app, connection, io) {
             });
         var queryData = url.parse(req.url, true).query;
         console.log(JSON.stringify(queryData.key));
-
-        // console.log(JSON.stringify(data)) //TODO: to extract info from -- DONE
-        // console.log(JSON.stringify(queryData.key));
-        
     });
 
     return router;

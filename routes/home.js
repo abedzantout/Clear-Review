@@ -1,6 +1,14 @@
 var app = require('express');
 var router = app.Router();
 var url = require('url');
+
+/**
+ *
+ * @param app
+ * @param connection
+ * @param io
+ * @return router and middleware responsible for page rendering of content in database in real time
+ */
 module.exports = function(app, connection, io) {
     connection.query('SELECT title from course',  function (err, rows, fields) {
         if (err) throw err;
@@ -14,6 +22,7 @@ module.exports = function(app, connection, io) {
                 data: data
             });
         });
+
     });
 
 
@@ -32,20 +41,17 @@ module.exports = function(app, connection, io) {
                 SURNAME: SURNAME
             });
         });
+
+        io.on('connection', function (socket) {
+            socket.on('clientMessage', function (msg) {
+                console.log(msg);
+            });
+        });
+
     });
-
-
-
-
 
     app.get('/home',function(req, res){
         res.render('home.ejs');
-
-        io.on('clientMessage', function (data, from) {
-            io.emit('serverMessage', 'Got a message!');
-            console.log('I received a message by ', from);
-        });
-
     });
 
 };

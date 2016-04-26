@@ -12,10 +12,14 @@ var connection = mysql.createConnection(dbconfig.connection);
 //TODO: implement regular express
 //var re = /^[a-zA-Z]{3}[0-9]{1,}@mail\.aub\.edu$/i;
 
-
+// connect to database
 connection.query('USE ' + dbconfig.database);
 
-// expose this function to our app using module.exports
+/**
+ * expose this function to our app using module.exports
+ * @param passport
+ * @return router responsible of authenticating the user on sign up and sign in
+ */
 module.exports = function (passport) {
 
     // =========================================================================

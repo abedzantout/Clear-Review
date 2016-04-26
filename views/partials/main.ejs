@@ -9,18 +9,18 @@
         <section class="mdl-layout mdl-grid mdl-grid--no-spacing CourseCardHolder">
 
             <script>
-                var connectedArray = {};
+                // socket connection
                 var socket = io();
-
-                // TODO: fix
-                //socket.emit('clientMessage', 'client message');
+                socket.on('connect', function() {
+                    socket.emit('clientMessage', 'client message');
+                });
 
                 socket.on('courses', function (data) {
                     var arr = Object.keys(data).map(function (k) {
                         return data[k]
                     });
-                    //This is the script to dynamically create the cards.
-                    for (var i = 0; i < arr[0].length; i++) {
+                    console.log(arr[0][1]);
+                    for(i = 0; i < arr[0].length; i++) {
                         var containingDiv = document.getElementsByClassName("CourseCardHolder")[0];
                         var span = document.createElement("div");
                         span.className = "tab";
@@ -281,7 +281,6 @@
 
 
                 </script>
-
 
         </section>
     </div>

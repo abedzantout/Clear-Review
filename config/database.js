@@ -1,6 +1,9 @@
 // config/database.js
 
-//make sure tailor these specifications to your machine
+/**
+ * 
+ * @type {{connection: {host: string, user: string, password: string}, database: string, users_table: string}}
+ */
 module.exports = {
     'connection': {
         

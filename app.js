@@ -20,8 +20,6 @@ var app             = express();
 /**
  * Module dependencies.
  */
-
-//var app = require('./app');
 var debug = require('debug')('clear-review:server');
 var http = require('http');
 
@@ -59,7 +57,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-
+/**
+ * establishes connection with mysql server
+ */
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -101,10 +101,10 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // routes ======================================================================
-require('./app/cr-auth-routes')(app, passport);// load our routes and pass in our app and fully configured passport
-require('./app/search.js')(app, connection, io);
-require('./routes/home.js')(app, connection, io);
-//require('./app/content.js')(app, connection ,io);
+require('./app/cr-auth-routes')(app, passport);  // load our routes and pass in our app and fully configured passport
+require('./app/search.js')(app, connection, io); // load our routes and pass in our app and fully configured search functionality
+require('./routes/home.js')(app, connection, io);// load our routes and pass in our app and renders the home page
+require('./app/content.js')(app, connection ,io);// for testing purposes only
 
 
 // catch 404 and forward to error handler
@@ -115,7 +115,6 @@ app.use(function (req, res, next) {
 });
 
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {

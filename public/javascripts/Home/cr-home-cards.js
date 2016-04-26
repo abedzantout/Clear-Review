@@ -1,17 +1,9 @@
-/**
- * Created by Ali on 4/23/2016.
- */
 window.onload = function(){
-
-
-
-
-
-
-
     //SHOW DIALOG FOR CourseProfileDetails
     var dialogCourseProfile = document.getElementById("CourseProfile");
     var CourseProfilebutton = document.getElementsByClassName("CourseCard");
+
+    
     for(var i = 0; i<CourseProfilebutton.length; i++){
         if (! dialogCourseProfile.showModal) {
             dialogPolyfill.registerDialog(dialogCourseProfile);

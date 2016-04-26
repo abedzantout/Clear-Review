@@ -12,116 +12,100 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/0.3.7/awesome-bootstrap-checkbox.css">
     <link rel="stylesheet" href="stylesheets/libraries/jquery.typeahead.css">
-    <link rel="stylesheet" href="game_v3.css">
 
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.js"></script>
     <script src="javascripts/libraries/jquery.typeahead.js"></script>
 
     <style>
 
-        #form-game_v3 {
-            width: 50%;
-            margin: 0 auto 20px;
+        #form-game_v2 .typeahead__container.backdrop {
+            position: fixed !important;
+            width: 80%;
+            left: 10%;
+            top: 50px;
         }
 
-        .tab-content.champion {
-            overflow: inherit;
+        #form-game_v2 .typeahead__container.backdrop .typeahead__query input {
+            font-size: 3rem;
+            height: auto;
+            color: #333;
         }
 
-        .champion-form-container {
-            position: relative;
+        #form-game_v2 .typeahead__container.backdrop .typeahead__button {
+            display: none;
         }
 
-        #champion-list {
-            position: relative;
-            z-index: 1;
+        #form-game_v2 li.typeahead__group {
+            padding: 10px 10px 0;
         }
 
-        #champion-list .typeahead__list {
-            padding: 0;
-        }
-
-        #champion-list .typeahead__list:not(.empty) > li {
-            border-left: 1px solid #fff;
-            border-top: 1px solid #fff;
-            border-right: 1px solid #d7d7d7;
-            border-bottom: 1px solid #d7d7d7;
-            background-color: #efefef;
-            padding: 5px;
+        #form-game_v2 li.typeahead__item {
             display: inline-block;
-            text-align: center;
+            font-size: 0;
+            border: 0;
+            position: relative;
+            margin: 5px;
         }
 
-        #champion-list .typeahead__list > li > a {
-            padding: 6px 10px;
-        }
-
-        #champion-list .champion-image {
-            display: block;
-        }
-
-        #champion-list .champion-image img {
-            width: 60px;
-            height: 60px;
-            text-align: center;
-            display: inline-block;
-        }
-
-        #champion-list .champion-name {
-            font-size: 13px;
-        }
-
-        #champion-modal em {
-            font-style: italic;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .champion-counter {
-            font-size: 12px;
+        #form-game_v2 li.typeahead__item span.title {
+            display: none;
             position: absolute;
             bottom: 0;
-        }
-
-        .champion-filters .checkbox input[type=radio]:checked+label::after,
-        .champion-filters .checkbox input[type=checkbox]:checked+label::after {
-            font-family: Icons;
-            content: "\f00c";
-        }
-
-        .champion-filters {
-            margin-bottom: 20px;
-            position: relative;
             width: 100%;
-            list-style: none;
-            font-size: 13px;
-            text-align: left;
-            background-color: #fff;
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            border-radius: 2px;
-            background-clip: padding-box;
+            text-transform: capitalize;
+            border-radius: 0;
         }
 
-        .champion-filters > ul {
-            padding: 10px;
-            display: inline-block;
+        #form-game_v2 li.typeahead__item:hover span.title,
+        #form-game_v2 li.typeahead__item.active span.title {
+            display: block;
         }
 
-        .champion-filters > ul > li {
-            display: inline-block;
-            padding-right: 30px;
+        #form-game_v2 li.typeahead__item span {
+            font-size: 1rem;
+            background: #fff;
+            padding: 2px 5px;
+            border-radius: 10px;
         }
 
-        .champion-filters label {
-            cursor: pointer;
+        #form-game_v2 .typeahead__list {
+            background: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
-        .popup ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        #form-game_v2 .typeahead__list a {
+            padding: 1px;
+        }
+
+        #form-game_v2 .typeahead__list .typeahead__item a:hover {
+            background: transparent;
+        }
+
+        #form-game_v2 .typeahead__list .typeahead__item a img {
+            border: solid 1px transparent;
+            width: 178px;
+        }
+
+        #form-game_v2 .typeahead__list .typeahead__item a:hover img,
+        #form-game_v2 .typeahead__list .typeahead__item.active a img {
+            border-color: #4D90FE;
+        }
+
+        #form-game_v2 .typeahead__list .typeahead__item a:hover span {
+            opacity: .8;
+        }
+
+        #form-game_v2 .typeahead__group a {
+            background: transparent;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            color: #ccc;
+        }
+
+        #form-game_v2 .ui.label {
+            text-transform: capitalize;
         }
 
     </style>
@@ -132,225 +116,103 @@
 </head>
 <body>
 
-<div style="width: 100%; max-width: 1000px; margin: 0 auto;">
+<form id="form-game_v2" name="form-game_v2">
+    <div class="typeahead__container">
+        <div class="typeahead__field">
 
-    <h1>Game_v3 Demo</h1>
+            <span class="typeahead__query">
+                <input class="js-typeahead-game_v2" name="game_v2[query]" placeholder="Search" autocomplete="off" type="search">
+            </span>
+            <span class="typeahead__button">
+                <button type="submit">
+                    <i class="typeahead__search-icon"></i>
+                </button>
+            </span>
 
-    <div class="champion-form-container">
-
-        <form id="form-game_v3" name="form-game_v3">
-            <div class="typeahead__container">
-                <div class="typeahead__field">
-
-                    <span class="typeahead__query">
-                        <input class="js-typeahead-input"
-                               name="game_v3[query]"
-                               type="search"
-                               placeholder="Search"
-                               autocomplete="off">
-                    </span>
-                    <span class="typeahead__button">
-                        <button type="submit">
-                            <i class="typeahead__search-icon"></i>
-                        </button>
-                    </span>
-
-                </div>
-            </div>
-        </form>
-
-        <div id="champion-counter" class="champion-counter"></div>
-    </div>
-
-    <div id="champion-list" class="typeahead__result champion-list detached loading"></div>
-
-    <div id="champion-modal"
-         class="ui modal">
-        <i class="close icon"></i>
-
-        <div class="image content">
-
-            <div class="description">
-                <div class="ui header" data-champion-name></div>
-                <em data-champion-title></em>
-
-                <p data-champion-blurb></p>
-            </div>
-
-        </div>
-        <div class="content">
-            <div class="ui header">Stats</div>
-            ...
-            <div class="ui header">Video</div>
-            ...
-            <div class="ui header">Skills</div>
-            ...
-        </div>
-        <div class="actions">
-            <div class="ui positive right labeled icon button">
-                Ok !
-                <i class="checkmark icon"></i>
-            </div>
         </div>
     </div>
-</div>
+</form>
+
 
 <script>
+    window.onresize = function(event) {
+        if ($('#form-game_v2').find('> .typeahead__container.backdrop')) {
+            $('#form-game_v2').find('.typeahead__list').css('max-height', $(window).height() - 200 + "px")
+        }
+    }
 
-    $(function () {
-
-        typeof $.typeahead === 'function' && $.typeahead({
-            input: ".js-typeahead-input",
-            minLength: 0,
-            maxItem: 0,
-            order: "asc",
-            hint: true,
-            resultContainer: '#champion-list',
-            generateOnLoad: true,
-            cache: true,
-            ttl: 3600000 * 24 * 7, // 1 week
-            compression: true,
-            display: ["key", "name"],
-            template: '<span class="champion-image">' +
-            '<img src="//ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/{{image.full}}" alt="{{name}} {{title}}">' +
-            '</span>' +
-            '<span class="champion-name">{{name}}</span>',
-            emptyTemplate: function (query) {
-                return 'No champion found' + ((query) ? ' matching "' + query + '"' : '');
-            },
-            source: {
-                champion: {
-                    url: [
-                        {
-                            url: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion",
-                            dataType: "json",
-                            data: {
-                                champData: 'info,tags,image,blurb',
-                                api_key: '4a9e144c-33b6-4283-98a8-378e0d58b8ab'
-                            },
-                            callback: {
-                                done: function (data) {
-                                    if (!(data instanceof Array)) {
-                                        data = $.map(data.data, function (value, index) {
-                                            for (var type in classification) {
-                                                if (!classification.hasOwnProperty(type)) continue;
-                                                if (~classification[type].indexOf(value.key)) {
-                                                    value.classification = type;
-                                                    break;
-                                                }
-                                            }
-                                            var tags = {};
-                                            for (var i = 0; i < value.tags.length; i++) {
-                                                tags[value.tags[i]] = true;
-                                            }
-                                            value.tags = tags;
-
-                                            return value;
-                                        });
-                                    }
-                                    return data;
-                                }
-                            }
-                        }
-                    ]
+    $.typeahead({
+        input: '.js-typeahead-game_v2',
+        minLength: 1,
+        maxItem: false,
+        highlight: false,
+        hint: true,
+        group: true,
+        maxItemPerGroup: 16,
+        backdrop: {
+            "background-color": "#fff"
+        },
+        backdropOnFocus: true,
+        cache: "sessionStorage",
+        compression: true,
+        cancelButton: false,
+        template: function () {
+            return '<span class="ui blue small label">{{display}}</span>';
+        },
+        source: {
+            game: {
+                href: "http://www.gamer-hub.com/game/{{id}}/{{display|slugify}}/",
+                template: function (query, item) {
+                    return '<img src="http://cdn.gamer-hub.com/images/' + this.helper.slugify.call(this, item.display) + '.jpg">' +
+                            '<span class="title">{{display}}</span>';
+                },
+                ajax: {
+                    url: "http://www.gamer-hub.com/game/list.json",
+                    dataType: "jsonp",
+                    path: "data"
                 }
             },
-            callback: {
-                onReady: function (node) {
-                    $('#launch-game-v3-demo').addClass('hidden');
-                    $('#game-v3-demo-container').removeClass('hidden');
-                },
-                onResult: function (node, query, result, resultCount) {
-                    $('#champion-counter').text(resultCount + ' champions');
-                },
-                onClickBefore: function (node, a, item, event) {
-
-                    event.preventDefault();
-
-                    $('#champion-modal [data-champion-name]').text(item.name)
-                    $('#champion-modal [data-champion-title]').text(item.title)
-                    $('#champion-modal [data-champion-blurb]').text(item.blurb)
-
-                    $('#champion-modal').modal('show');
-
-                },
-                onLayoutBuiltBefore: function (node, query, result, resultHtmlList) {
-
-                    var roles;
-                    for (var i = 0; i < result.length; i++) {
-                        roles = [];
-
-                        for (role in result[i].tags) {
-                            if (!result[i].tags.hasOwnProperty(role)) continue;
-                            roles.push(role);
-                        }
-
-                        resultHtmlList.find('li:eq(' + i + ')').popup({
-                            position: "left center",
-                            html: "<ul>" +
-                            "<li>Role(s): " + roles.join(", ") + "</li>" +
-                            "<li>Classification: " + result[i].classification + "</li>" +
-                            "<li>Difficulty: " + result[i].info.difficulty + "</li>" +
-                            "</ul>"
-                        });
-
-                    }
-                    return resultHtmlList;
-
+            tag: {
+                href: "http://www.gamer-hub.com/tag/{{id}}/{{display|slugify}}/",
+                ajax: {
+                    url: "http://www.gamer-hub.com/tag/list.json",
+                    dataType: "jsonp",
+                    path: "data"
+                }
+            },
+            category: {
+                href: "http://www.gamer-hub.com/category/{{id}}/{{display|slugify}}/",
+                ajax: {
+                    url: "http://www.gamer-hub.com/category/list.json",
+                    dataType: "jsonp",
+                    path: "data"
                 }
             }
-        });
+        },
+        callback: {
+            onShowLayout: function (node, query) {
+                node.attr('placeholder', 'Search for a Game ...');
+                node.closest('form').find('.typeahead__list').css('max-height', $(window).height() - 200 + "px");
+            },
+            onHideLayout: function (node, query) {
+                node.attr('placeholder', 'Search');
+            },
+            onLayoutBuiltBefore: function (node, query, result, resultHtmlList) {
+                resultHtmlList.find('li[data-search-group="game"]').remove();
+                return resultHtmlList;
+            },
+            onClickAfter: function (node, a, item, event) {
 
+                event.preventDefault();
 
-        var socket = io();
+                var r = confirm("You will be redirected to:\n" + item.href + "\n\nContinue?");
+                if (r == true) {
+                    window.open(item.href);
+                }
 
-        socket.on('courses', function (data) {
-            var arr = Object.keys(data).map(function(k) {
-                return data[k]
-            });
-            console.log('testing: ', arr[0].male);
-        });
-
-
-        var classification = {
-            male: [
-                'Tryndamere', 'Gragas', 'Ryze', 'Olaf', 'Viktor', 'Garen', 'Singed', 'Zed',
-                'Darius', 'Vayne', 'Varus', 'Jayce', 'Pantheon', 'Corki', 'Azir', 'Graves', 'Malzahar', 'Kayle', 'LeeSin', 'Nunu',
-                'TwistedFate', 'Jax', 'Vladimir', 'Quinn', 'Lucian', 'Yasuo', 'Draven', 'Swain', 'Talon', 'Ekko', 'Zilean', 'Braum',
-                'XinZhao', 'MasterYi', 'Taric', 'Gangplank', 'JarvanIV', 'Ezreal', 'Udyr'
-            ],
-            female: [
-                'Cassiopeia', 'Poppy', 'Annie', 'Karma', 'Lux', 'Ahri', 'Lissandra', 'Morgana', 'Evelynn', 'Sona', 'Katarina',
-                'Lulu', 'Ashe', 'Leona', 'Syndra', 'Riven', 'Caitlyn', 'Nidalee', 'Vi', 'Irelia', 'Elise', 'Shyvana', 'Kalista',
-                'Diana', 'Sejuani', 'Akali', 'Sivir', 'Janna', 'Orianna', 'Fiora', 'Leblanc', 'Jinx', 'MissFortune', 'Zyra', 'Nami'
-            ],
-            creature: [
-                'Anivia', 'Maokai', 'Fizz', 'Heimerdinger', 'Rumble', 'Mordekaiser', 'KogMaw', 'Karthus', 'Alistar', 'Khazix',
-                'Galio', 'Kennen', 'Veigar', 'Bard', 'Gnar', 'Volibear', 'DrMundo', 'Brand', 'Zac', 'RekSai', 'Tristana', 'Hecarim',
-                'Rengar', 'Warwick', 'Skarner', 'Malphite', 'Xerath', 'Teemo', 'Nasus', 'Renekton', 'Shaco', 'Ziggs', 'FiddleSticks',
-                'Rammus', 'Chogath', 'Soraka', 'Nocturne', 'Yorick', 'Urgot', 'MonkeyKing', 'Blitzcrank', 'Shen', 'Twitch', 'Amumu',
-                'Trundle', 'Kassadin', 'Velkoz', 'Aatrox', 'Thresh', 'Sion', 'Nautilus'
-            ]
-        };
-        $('#clear-champion-filters').on('click', function () {
-
-            // Visually reset filters
-            $('.champion-filters select').find('option').prop("selected", false);
-            $('.champion-filters input[type="checkbox"]').prop("checked", false);
-            $('.champion-filters input[type="radio"]').prop("checked", false).first().prop("checked", true);
-
-            // Clear dynamic filters inside Typeahead "game_v3-query" instance, at this point you know what you are doing.
-            Typeahead['#game_v3-query'].filters.dynamic = {};
-
-            // Trigger a manual search
-            $('#game_v3-query').trigger('input.typeahead');
-
-        });
-
-    });
-
-
+            }
+        }
+    })
 </script>
-
 </body>
 </html>
