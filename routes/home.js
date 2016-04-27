@@ -25,7 +25,6 @@ module.exports = function (app, connection, io) {
 
     });
 
-
     connection.query('SELECT FIRST_NAME, SURNAME from Teacher', function (err, rows, fields) {
         if (err) throw err;
         var FIRST_NAME = [];
@@ -50,16 +49,17 @@ module.exports = function (app, connection, io) {
 
     });
 
-
-    connection.query('SELECT NUMBER, TITLE, SUBJECT FROM COURSE', function (err, rows, fields) {
+    connection.query('SELECT NUMBER, TITLE, SUBJECT, CREDIT_NUM FROM COURSE', function (err, rows, fields) {
         if (err) throw err;
         var NUMBER = [];
         var TITLE = [];
         var SUBJECT = [];
+        var CREDIT_NUM = []
         for (var i = 0; i < rows.length; i++) {
             NUMBER.push(rows[i].NUMBER);
             TITLE.push(rows[i].TITLE);
             SUBJECT.push(rows[i].SUBJECT);
+            CREDIT_NUM.push(rows[i].CREDIT_NUM)
         }
         console.log(NUMBER, TITLE, SUBJECT);
 
@@ -67,11 +67,10 @@ module.exports = function (app, connection, io) {
             socket.emit('courseDetails', {
                 NUMBER: NUMBER,
                 TITLE: TITLE,
-                SUBJECT: SUBJECT
+                SUBJECT: SUBJECT,
+                CREDIT_NUM: CREDIT_NUM
             });
         });
-
-
     });
 
     app.get('/home', function (req, res) {
