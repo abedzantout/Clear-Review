@@ -9,18 +9,40 @@
         <section class="mdl-layout mdl-grid mdl-grid--no-spacing CourseCardHolder">
 
             <script>
+
+
+                //////==============================================================================
+                $('input.typeahead').bind('typeahead:selected', function (obj, datum, name) {
+                    alert(JSON.stringify(obj)); // object
+                    // outputs, e.g., {"type":"typeahead:selected","timeStamp":1371822938628,"jQuery19105037956037711017":true,"isTrigger":true,"namespace":"","namespace_re":null,"target":{"jQuery19105037956037711017":46},"delegateTarget":{"jQuery19105037956037711017":46},"currentTarget":
+                    alert(JSON.stringify(datum)); // contains datum value, tokens and custom fields
+                    // outputs, e.g., {"redirect_url":"http://localhost/test/topic/test_topic","image_url":"http://localhost/test/upload/images/t_FWnYhhqd.jpg","description":"A test description","value":"A test value","tokens":["A","test","value"]}
+                    // in this case I created custom fields called 'redirect_url', 'image_url', 'description'
+                    alert(JSON.stringify(name)); // contains dataset name
+                    // outputs, e.g., "my_dataset"
+                });
+
+
                 // socket connection
                 var socket = io();
-                socket.on('connect', function() {
+                socket.on('connect', function () {
                     socket.emit('clientMessage', 'client message');
+                });
+
+                socket.on('courseDetails', function (data) {
+                    var arr = Object.keys(data).map(function (k) {
+                        return data[k]
+                    });
+                    console.log(arr);
                 });
 
                 socket.on('courses', function (data) {
                     var arr = Object.keys(data).map(function (k) {
                         return data[k]
                     });
+
                     console.log(arr[0][1]);
-                    for(i = 0; i < arr[0].length; i++) {
+                    for (i = 0; i < arr[0].length; i++) {
                         var containingDiv = document.getElementsByClassName("CourseCardHolder")[0];
                         var span = document.createElement("div");
                         span.className = "tab";
@@ -55,19 +77,13 @@
 
     <div class="mdl-layout__tab-panel" id="professors">
         <section class="mdl-layout mdl-grid mdl-grid--no-spacing ProfessorCardHolder">
-            <%
-            //This is the input array which takes values from node Express
-            Professors = ['Mahmoud Bdier', 'Haidar Safa', 'Ahmad Dhaini', 'Wassim El-Hajj', 'Fatema Abu-Salem'];
-            %>
 
             <script>
-
-
                 socket.on('professors', function (data) {
 
                     var arr = Object.keys(data).map(function (k) {
-                                return data[k]
-                            });
+                        return data[k]
+                    });
                     //This is the script to dynamically create the cards.
                     for (var i = 0; i < arr[0].length; i++) {
                         var containingDiv = document.getElementsByClassName("ProfessorCardHolder")[0];
@@ -137,14 +153,13 @@
                 <script>
 
                     var counter = 0;
-                    var MyCourses = ['CMPS 253', 'CMPS 258', 'CMPS 212', 'CMPS 257', 'CMPS 200', 'CMPS 278'];
-                    var CRNs = ['12345', '23456', '34567', '45678', '56789', '67890'];
+                    var MyCourses = ['CMPS 200', 'CMPS 251', 'CMPS 255', 'CMPS 257', 'CMPS 272', 'CMPS 278', 'CMPS 284', 'CMPS 287', 'CMPS 299', 'CMPS 205', 'CMPS 253'];
+                    var CRNs = ['11107', '11154', '11155', '11161', '11162', '11164', '11166', '11167', '11168', '11385', '21129'];
                     var CurrentCourses = [];
 
                     var inputCRN = document.getElementById("CRNinput");
 
                     var WarningMessage = document.getElementById("WarningMessage");
-                    alert('yes');
                     document.getElementById("addCourseBtn").onclick = function () {
 
                         if (inputCRN.value) {
@@ -212,9 +227,12 @@
                         cardButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ProfessorCard";
                         cardButton.innerHTML = "View";
 
-                        var cardRateButton = document.createElement("div");
+                        var cardRateButton = document.createElement("form");
                         cardRateButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ";
                         cardRateButton.innerHTML = "Rate";
+                        //TODO: to fix
+                        var cardRateButtonLink = document.createElement("a");
+                        cardRateButtonLink.href = "/ceia";
 
                         var cardDeleteButton = document.createElement("div");
                         cardDeleteButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons CourseDelBtn";
@@ -230,6 +248,7 @@
                             outercard.appendChild(cardAction);
                             cardAction.appendChild(cardButton);
                             cardAction.appendChild(cardRateButton);
+                            cardRateButton.appendChild(cardRateButtonLink);
                             cardAction.appendChild(cardDeleteButton);
                             CurrentCourses.push(crn);
                             WarningMessage.style.display = "none";
@@ -272,8 +291,6 @@
                         var ElementToRemove = this.parentElement.parentElement;
                         ElementToRemove.parentElement.removeChild(ElementToRemove);
                         var index = CurrentCourses.indexOf(ElementToRemove.getElementsByClassName("mdl-card__title-text")[0].innerHTML);
-                        alert(CurrentCourses.toString());
-                        alert(index);
                         //The code on client side is now ready. We only need queries.
 
 

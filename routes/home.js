@@ -9,8 +9,8 @@ var url = require('url');
  * @param io
  * @return router and middleware responsible for page rendering of content in database in real time
  */
-module.exports = function(app, connection, io) {
-    connection.query('SELECT title from course',  function (err, rows, fields) {
+module.exports = function (app, connection, io) {
+    connection.query('SELECT title from course', function (err, rows, fields) {
         if (err) throw err;
         var data = [];
         for (var i = 0; i < rows.length; i++) {
@@ -26,7 +26,7 @@ module.exports = function(app, connection, io) {
     });
 
 
-    connection.query('SELECT FIRST_NAME, SURNAME from Teacher',  function (err, rows, fields) {
+    connection.query('SELECT FIRST_NAME, SURNAME from Teacher', function (err, rows, fields) {
         if (err) throw err;
         var FIRST_NAME = [];
         var SURNAME = [];
@@ -50,7 +50,31 @@ module.exports = function(app, connection, io) {
 
     });
 
-    app.get('/home',function(req, res){
+
+    connection.query('SELECT NUMBER, TITLE, SUBJECT FROM COURSE', function (err, rows, fields) {
+        if (err) throw err;
+        var NUMBER = [];
+        var TITLE = [];
+        var SUBJECT = [];
+        for (var i = 0; i < rows.length; i++) {
+            NUMBER.push(rows[i].NUMBER);
+            TITLE.push(rows[i].TITLE);
+            SUBJECT.push(rows[i].SUBJECT);
+        }
+        console.log(NUMBER, TITLE, SUBJECT);
+
+        io.on('connection', function (socket) {
+            socket.emit('courseDetails', {
+                NUMBER: NUMBER,
+                TITLE: TITLE,
+                SUBJECT: SUBJECT
+            });
+        });
+
+
+    });
+
+    app.get('/home', function (req, res) {
         res.render('home.ejs');
     });
 

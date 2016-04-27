@@ -26,10 +26,7 @@ module.exports = function(app, connection, io) {
             });
         });
     });*/
-
-    app.get('/profile',function(req, res){
-        res.render('profile.ejs');
-    });
+    
     /**
      * callback function on get request of profile
      * @callback module~requestCallback

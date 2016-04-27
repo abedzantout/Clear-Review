@@ -59,11 +59,21 @@ app.use(bodyParser.json());
 
 /**
  * establishes connection with mysql server
+ * tailor your connection according to your computer's specification
+ *
+ *
+ * =========================================================================================================
+ *  MODIFY ME
+ *  !!!!!!!!
+ *  !!!!!!!!
+ * =========================================================================================================
+ *
+ *
  */
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: 'mysql',
+    user: 'root', // to change according to admin computer
+    password: 'mysql', // to change according to admin computer
     database: 'clearreview'
 });
 connection.connect();
@@ -102,10 +112,9 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 require('./app/cr-auth-routes')(app, passport);  // load our routes and pass in our app and fully configured passport
-require('./app/search.js')(app, connection, io); // load our routes and pass in our app and fully configured search functionality
-require('./routes/home.js')(app, connection, io);// load our routes and pass in our app and renders the home page
-require('./app/content.js')(app, connection ,io);// for testing purposes only
-
+require('./app/search.js')(app, connection, io); // load our routes and pass in our app and fully configured search functionality.
+require('./routes/home.js')(app, connection, io);// load our routes and pass in our app and renders the home page.
+require('./app/ceia.js')(app, connection, io); //load the ceia forms.
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -197,6 +206,4 @@ function onListening() {
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
 }
-
-
 module.exports = app;

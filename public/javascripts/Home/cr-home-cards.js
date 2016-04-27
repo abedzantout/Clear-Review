@@ -3,7 +3,7 @@ window.onload = function(){
     var dialogCourseProfile = document.getElementById("CourseProfile");
     var CourseProfilebutton = document.getElementsByClassName("CourseCard");
 
-    
+
     for(var i = 0; i<CourseProfilebutton.length; i++){
         if (! dialogCourseProfile.showModal) {
             dialogPolyfill.registerDialog(dialogCourseProfile);
@@ -30,7 +30,4 @@ window.onload = function(){
             dialogprofessorProfile.close();
         });
     }
-
-
-
 };
