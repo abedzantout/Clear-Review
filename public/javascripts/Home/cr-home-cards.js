@@ -19,6 +19,9 @@ window.onload = function(){
         });
     }
 
+
+
+    var socket = io();
     //SHOW DIALOG FOR ProfessorProfiles
     var dialogprofessorProfile = document.getElementById("ProfessorProfile");
     var ProfessorProfilebutton = document.getElementsByClassName("ProfessorCard");
@@ -28,6 +31,7 @@ window.onload = function(){
         }
         ProfessorProfilebutton[i].addEventListener('click', function() {
             var ProfName = this.parentElement.parentElement.firstElementChild.firstElementChild;
+            socket.emit('clientMessage', ProfName.innerHTML);
             var ProfessorTitle = document.getElementsByClassName("ProfessorTitle")[0].innerHTML = ProfName.innerHTML;
             var ProfessorCoursesTitle = document.getElementsByClassName("ProfessorCoursesTitle")[0].innerHTML = "The courses below are being taught by" + ProfName.innerHTML;
 

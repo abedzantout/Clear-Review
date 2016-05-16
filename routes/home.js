@@ -25,6 +25,7 @@ module.exports = function (app, connection, io) {
 
     });
 
+
     connection.query('SELECT FIRST_NAME, SURNAME from Teacher', function (err, rows, fields) {
         if (err) throw err;
         var FIRST_NAME = [];
@@ -41,13 +42,55 @@ module.exports = function (app, connection, io) {
             });
         });
 
-        io.on('connection', function (socket) {
-            socket.on('clientMessage', function (msg) {
-                console.log(msg);
-            });
-        });
+
+        for (var i = 0; i < rows.length; i++) {
+            add(connection, rows[i].FIRST_NAME, rows[i].SURNAME, io);
+        }
+
 
     });
+
+
+    io.on('connection', function (socket) {
+        socket.on('clientMessage', function (msg) {
+            console.log(msg);
+        });
+    });
+
+
+    function add(connection, FIRST_NAME, SURNAME, io) {
+        var queryCoursesTaughtBy = "SELECT COURSE.COURSEID,COURSE.TITLE,COURSE.NUMBER,COURSE.CREDIT_NUM FROM COURSE,COURSEINSTANCE,TEACHER WHERE TEACHER.FIRST_NAME = ? AND TEACHER.SURNAME = ? AND TEACHER.TEACHERID = COURSEINSTANCE.TEACHERID AND COURSEINSTANCE.COURSEID = COURSE.COURSEID"
+        connection.query({
+            sql: queryCoursesTaughtBy,
+            values: [FIRST_NAME, SURNAME]
+        }, function (err, rows, fields) {
+            if (err) throw err;
+
+            var TITLE = [];
+            var COURSEID = [];
+            var NUMBER = [];
+            var CREDIT_NUM = [];
+            for (var i = 0; i < rows.length; i++) {
+                TITLE.push(rows[i].TITLE);
+                COURSEID.push(rows[i].COURSEID);
+                NUMBER.push(rows[i].NUMBER);
+                CREDIT_NUM.push(rows[i].CREDIT_NUM);
+            }
+
+            console.log(TITLE + ' ' + COURSEID)
+
+
+            io.on('connection', function (socket) {
+                socket.emit('professorProfile', {
+                    TITLE: TITLE,
+                    COURSEID: COURSEID,
+                    NUMBER: NUMBER,
+                    CREDIT_NUM: CREDIT_NUM
+                });
+            });
+        });
+    }
+
 
     connection.query('SELECT NUMBER, TITLE, SUBJECT, CREDIT_NUM FROM COURSE', function (err, rows, fields) {
         if (err) throw err;

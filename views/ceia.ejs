@@ -16,7 +16,7 @@
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Web Starter Kit">
-    <link rel="icon" sizes="192x192" href="images/touch/Logo_192x192.png">
+    <link rel="icon" sizes="192x192" href="../public/images/touch/Logo_192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -71,16 +71,17 @@
     <h2>Mahmoud Bdeir</h2>
 </div>
 
-<form id="Survey" action="/SubmitCEIA">
+<form id="Survey" action="/home">
     <table class="OptionsTable">
         <tr>
             <td>
-                <h5> - Was the grading system was clear and fair ?</h5>
+                <h5> - Was the grading system clear and fair ?</h5>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1YES">
-                    <input type="radio" id="Q1YES" class="mdl-radio__button" name="options1" value="1" style="float:left;">
+                    <input type="radio" id="Q1YES" class="mdl-radio__button" name="options1" value="1"
+                           style="float:left;">
                     <span class="mdl-radio__label">Yes</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1NO"  style="margin-left: 35%;">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1NO" style="margin-left: 35%;">
                     <input type="radio" id="Q1NO" class="mdl-radio__button" name="options1" value="2">
                     <span class="mdl-radio__label">No</span>
                 </label>
@@ -94,15 +95,16 @@
             <td>
                 <h5> - Did this course increase your interest in the subject ?</h5>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q2YES">
-                    <input type="radio" id="Q2YES" class="mdl-radio__button" name="options2" value="1" style="float:left;">
+                    <input type="radio" id="Q2YES" class="mdl-radio__button" name="options2" value="1"
+                           style="float:left;">
                     <span class="mdl-radio__label">Yes</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q2NO"  style="margin-left: 35%;">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q2NO" style="margin-left: 35%;">
                     <input type="radio" id="Q2NO" class="mdl-radio__button" name="options2" value="2">
                     <span class="mdl-radio__label">No</span>
                 </label>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q2MAYBE" style="float:right;">
-                    <input type="radio" id="Q2MAYBE" class="mdl-radio__button" name="options2" value="2" >
+                    <input type="radio" id="Q2MAYBE" class="mdl-radio__button" name="options2" value="2">
                     <span class="mdl-radio__label">Maybe</span>
                 </label>
             </td>
@@ -111,10 +113,11 @@
             <td>
                 <h5> - Have you learned something valuable to you in this course ?</h5>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q3YES">
-                    <input type="radio" id="Q3YES" class="mdl-radio__button" name="options3" value="1" style="float:left;">
+                    <input type="radio" id="Q3YES" class="mdl-radio__button" name="options3" value="1"
+                           style="float:left;">
                     <span class="mdl-radio__label">Yes</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q3NO"  style="margin-left: 35%;">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q3NO" style="margin-left: 35%;">
                     <input type="radio" id="Q3NO" class="mdl-radio__button" name="options3" value="2">
                     <span class="mdl-radio__label">No</span>
                 </label>
@@ -128,10 +131,11 @@
             <td>
                 <h5> - Did the instructor maintain your interest throughout the course ?</h5>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q4YES">
-                    <input type="radio" id="Q4YES" class="mdl-radio__button" name="options4" value="1" style="float:left;">
+                    <input type="radio" id="Q4YES" class="mdl-radio__button" name="options4" value="1"
+                           style="float:left;">
                     <span class="mdl-radio__label">Yes</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q4NO"  style="margin-left: 35%;">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q4NO" style="margin-left: 35%;">
                     <input type="radio" id="Q4NO" class="mdl-radio__button" name="options4" value="2">
                     <span class="mdl-radio__label">No</span>
                 </label>
@@ -145,8 +149,9 @@
             <td>
                 <h5> - Would you recommend this course to other students ?</h5>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5YES">
-                    <input type="radio" id="Q5YES" class="mdl-radio__button" name="options5" value="1" style="float:left;">
-                    <span class="mdl-radio__label" >Yes</span>
+                    <input type="radio" id="Q5YES" class="mdl-radio__button" name="options5" value="1"
+                           style="float:left;">
+                    <span class="mdl-radio__label">Yes</span>
                 </label>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5NO" style="margin-left: 35%;">
                     <input type="radio" id="Q5NO" class="mdl-radio__button" name="options5" value="2">
@@ -160,7 +165,8 @@
         </tr>
         <tr>
             <td>
-                <input id="SubmitButton" type="submit" class="mdl-button mdl-js-button mdl-button--raised" value="SUBMIT"/>
+                <input id="SubmitButton" type="submit" class="mdl-button mdl-js-button mdl-button--raised"
+                       value="SUBMIT"/>
             </td>
         </tr>
 

@@ -38,9 +38,9 @@
 
                 // socket connection
                 var socket = io();
-                socket.on('connect', function () {
-                    socket.emit('clientMessage', 'client message');
-                });
+                //socket.on('connect', function () {
+                  //  socket.emit('clientMessage', 'client message');
+                //});
 
                 socket.on('courseDetails', function (data) {
                     var arr = Object.keys(data).map(function (k) {
@@ -117,7 +117,7 @@
                         cardHeader.appendChild(title);
                         var cardDescription = document.createElement("div");
                         cardDescription.className = "mdl-card__supporting-text";
-                        cardDescription.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
+                        cardDescription.innerHTML = "Faculty of Arts and sciences.";
                         outercard.appendChild(cardDescription);
                         var cardAction = document.createElement("div");
                         cardAction.className = "mdl-card__actions mdl-card--border";
@@ -233,7 +233,7 @@
 
                         var cardDescription = document.createElement("div");
                         cardDescription.className = "mdl-card__supporting-text";
-                        cardDescription.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.";
+                        cardDescription.innerHTML = "Software Engineering - 3Cr";
 
                         var cardAction = document.createElement("div");
                         cardAction.className = "mdl-card__actions mdl-card--border";
@@ -242,12 +242,12 @@
                         cardButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ProfessorCard";
                         cardButton.innerHTML = "View";
 
-                        var cardRateButton = document.createElement("form");
-                        cardRateButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons ";
+
+                        //TODO: link to ceia
+                        var cardRateButton = document.createElement("a");
+                        cardRateButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons goToCeia ";
                         cardRateButton.innerHTML = "Rate";
-                        //TODO: to fix
-                        var cardRateButtonLink = document.createElement("a");
-                        cardRateButtonLink.href = "/ceia";
+                        cardRateButton.href = "/ceia";
 
                         var cardDeleteButton = document.createElement("div");
                         cardDeleteButton.className = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect MyNavButtons CourseDelBtn";
@@ -263,12 +263,13 @@
                             outercard.appendChild(cardAction);
                             cardAction.appendChild(cardButton);
                             cardAction.appendChild(cardRateButton);
-                            cardRateButton.appendChild(cardRateButtonLink);
+                           // cardRateButton.appendChild(cardRateButtonLink);
                             cardAction.appendChild(cardDeleteButton);
                             CurrentCourses.push(crn);
                             WarningMessage.style.display = "none";
                             attachListeners();
                             attachDelHandlers();
+                            linToCeia();
                         }
                         else {
                             WarningMessage.style.display = "block";
@@ -277,13 +278,17 @@
                     }
 
                     function attachListeners() {
+
                         var dialogCourseProfile = document.getElementById("CourseProfile");
                         var CourseProfilebutton = document.getElementsByClassName("CourseCard");
+
                         for (var i = 0; i < CourseProfilebutton.length; i++) {
+
                             if (!dialogCourseProfile.showModal) {
                                 dialogPolyfill.registerDialog(dialogCourseProfile);
                             }
                             CourseProfilebutton[i].addEventListener('click', function () {
+
                                 dialogCourseProfile.showModal();
                             });
                             dialogCourseProfile.querySelector('.close').addEventListener('click', function () {
@@ -312,6 +317,16 @@
                         }
                         ElementToRemove.parentElement.removeChild(ElementToRemove);
                         //The code on client side is now ready. We only need queries.
+                    }
+
+
+                    function linToCeia() {
+                       var goToCeia = document.getElementsByClassName('goToCeia');
+                        for(var i = 0; goToCeia.length; i++) {
+                            goToCeia[i].onclick = function(){
+                                window.location = 'ceia.ejs';
+                            }
+                        }
                     }
                 </script>
 
