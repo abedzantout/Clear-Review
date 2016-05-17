@@ -20,8 +20,6 @@
                     // in this case I created custom fields called 'redirect_url', 'image_url', 'description'
                     // alert(JSON.stringify(name)); // contains dataset name
                     // outputs, e.g., "my_dataset"
-
-
                     //TODO: to fix
                     var $div = $('<div/>', {
                         class: 'CourseCard'
@@ -85,8 +83,6 @@
         </section>
 
     </div>
-
-
     <div class="mdl-layout__tab-panel" id="professors">
         <section class="mdl-layout mdl-grid mdl-grid--no-spacing ProfessorCardHolder">
 
@@ -163,74 +159,77 @@
 
 
                 <script>
+                    //                    var counter = 0;
+                    //                    var MyCourses = ['CMPS 200', 'CMPS 251', 'CMPS 255', 'CMPS 257', 'CMPS 272', 'CMPS 278', 'CMPS 284', 'CMPS 287', 'CMPS 299', 'CMPS 205', 'CMPS 253'];
+                    //                    var CRNs = ['11107', '11154', '11155', '11161', '11162', '11164', '11166', '11167', '11168', '11385', '21129'];
+                    //                    var CurrentCourses = [];
 
 
-
-
-//                    var counter = 0;
-//                    var MyCourses = ['CMPS 200', 'CMPS 251', 'CMPS 255', 'CMPS 257', 'CMPS 272', 'CMPS 278', 'CMPS 284', 'CMPS 287', 'CMPS 299', 'CMPS 205', 'CMPS 253'];
-//                    var CRNs = ['11107', '11154', '11155', '11161', '11162', '11164', '11166', '11167', '11168', '11385', '21129'];
-//                    var CurrentCourses = [];
-
+                    socket.on("loadcourses", function (data) {
+                        var arr = Object.keys(data).map(function (k) {
+                            return data[k];
+                        });
+                        console.log(data.TITLE);
+                        for (var i = 0; i < arr[0].length; i++) {
+                            AddCourse(data.TITLE[i], data.NUMBER[i], data.CREDIT_NUM[i], data.SUBJECT[i]);
+                        }
+                    });
                     var inputCRN = document.getElementById("CRNinput");
                     //TODO: implement snackbar
                     var WarningMessage = document.getElementById("WarningMessage");
                     document.getElementById("addCourseBtn").onclick = function () {
-
                         socket.emit('checkcrn', inputCRN.value);
                         socket.on('checkcrn', function (data) {
-                            console.log(data);
+                            if (data.toString() == "error") {
+                                WarningMessage.style.display = "block";
+                                WarningMessage.innerHTML = "The course you have chosen is either already in your list or is not a course at all.";
+                            }
+                            else {
+                                console.log(data);
+                            }
                         });
                     };
 
+                    //                        if (inputCRN.value) {
+                    //                            if (CheckIfRegistered(inputCRN.value) && CheckIfIsACourse(inputCRN.value)) {
+                    //                                socket.emit('clientMessage', inputCRN.value);
+                    //                                AddCourse(inputCRN.value);
+                    //
+                    //                            }
+                    //                            else {
+                    //                                WarningMessage.style.display = "block";
+                    //                                WarningMessage.innerHTML = "The course you have chosen is either already in your list or is not a course at all.";
+                    //                            }
+                    //                        }
+                    //                        else {
+                    //                            WarningMessage.style.display = "block";
+                    //                            WarningMessage.innerHTML = "Please enter a CRN for the course you want to add.";
+                    //                        }
+                    //                    };
+                    //                    function CheckIfIsACourse(crn) {
+                    //                        for (var i = 0; i < CRNs.length; i++) {
+                    //                            if (CRNs[i] == crn) {
+                    //                                return true;
+                    //                            }
+                    //                        }
+                    //                        return false;
+                    //                    }
+                    //
+                    //                    function CheckIfRegistered(crn) {
+                    //                        if (CurrentCourses.length == 0) {
+                    //                            return true;
+                    //                        }
+                    //                        for (var i = 0; i < CurrentCourses.length; i++) {
+                    //                            if (CurrentCourses[i] == crn) {
+                    //                                return false;
+                    //                            }
+                    //                        }
+                    //                        return true;
+                    //                    }
 
 
-
-
-
-
-//                        if (inputCRN.value) {
-//                            if (CheckIfRegistered(inputCRN.value) && CheckIfIsACourse(inputCRN.value)) {
-//                                socket.emit('clientMessage', inputCRN.value);
-//                                AddCourse(inputCRN.value);
-//
-//                            }
-//                            else {
-//                                WarningMessage.style.display = "block";
-//                                WarningMessage.innerHTML = "The course you have chosen is either already in your list or is not a course at all.";
-//                            }
-//                        }
-//                        else {
-//                            WarningMessage.style.display = "block";
-//                            WarningMessage.innerHTML = "Please enter a CRN for the course you want to add.";
-//                        }
-//                    };
-
-
-//                    function CheckIfIsACourse(crn) {
-//                        for (var i = 0; i < CRNs.length; i++) {
-//                            if (CRNs[i] == crn) {
-//                                return true;
-//                            }
-//                        }
-//                        return false;
-//                    }
-//
-//                    function CheckIfRegistered(crn) {
-//                        if (CurrentCourses.length == 0) {
-//                            return true;
-//                        }
-//                        for (var i = 0; i < CurrentCourses.length; i++) {
-//                            if (CurrentCourses[i] == crn) {
-//                                return false;
-//                            }
-//                        }
-//                        return true;
-//                    }
-
-
-                    function AddCourse(crn) {
-                        counter = document.getElementsByClassName("MyCurrentCourses").length;
+                    function AddCourse(TITLE, NUMBER, CREDIT_NUM, SUBJECT) {
+                        //counter = document.getElementsByClassName("MyCurrentCourses").length;
                         var containingDiv = document.getElementById("MyCourseSection");
                         var span = document.createElement("div");
                         span.className = "tab";
@@ -244,13 +243,11 @@
                         var title = document.createElement("h2");
                         title.className = "mdl-card__title-text CourseCardName";
 
-
-                        //TODO: send CRN from server to client
-                        title.innerHTML = MyCourses[CRNs.indexOf(crn)];
+                        title.innerHTML = SUBJECT + " " + NUMBER;
 
                         var cardDescription = document.createElement("div");
                         cardDescription.className = "mdl-card__supporting-text";
-                        cardDescription.innerHTML = "Software Engineering - 3Cr";
+                        cardDescription.innerHTML = TITLE + " - " + CREDIT_NUM + "cr.";
 
                         var cardAction = document.createElement("div");
                         cardAction.className = "mdl-card__actions mdl-card--border";
@@ -271,26 +268,25 @@
                         cardDeleteButton.innerHTML = "Delete";
 
 
-                        if (counter < 6) {
-                            containingDiv.appendChild(span);
-                            containingDiv.appendChild(outercard);
-                            outercard.appendChild(cardHeader);
-                            cardHeader.appendChild(title);
-                            outercard.appendChild(cardDescription);
-                            outercard.appendChild(cardAction);
-                            cardAction.appendChild(cardButton);
-                            cardAction.appendChild(cardRateButton);
-                            // cardRateButton.appendChild(cardRateButtonLink);
-                            cardAction.appendChild(cardDeleteButton);
-                            CurrentCourses.push(crn);
-                            WarningMessage.style.display = "none";
-                            attachListeners();
-                            attachDelHandlers();
-                        }
-                        else {
-                            WarningMessage.style.display = "block";
-                            WarningMessage.innerHTML = "you exceeded the number of credits you are allowed to register";
-                        }
+                        containingDiv.appendChild(span);
+                        containingDiv.appendChild(outercard);
+                        outercard.appendChild(cardHeader);
+                        cardHeader.appendChild(title);
+                        outercard.appendChild(cardDescription);
+                        outercard.appendChild(cardAction);
+                        cardAction.appendChild(cardButton);
+                        cardAction.appendChild(cardRateButton);
+                        // cardRateButton.appendChild(cardRateButtonLink);
+                        cardAction.appendChild(cardDeleteButton);
+                        //CurrentCourses.push(crn);
+                        WarningMessage.style.display = "none";
+                        attachListeners();
+                        attachDelHandlers();
+
+//                        else {
+//                            WarningMessage.style.display = "block";
+//                            WarningMessage.innerHTML = "you exceeded the number of credits you are allowed to register";
+//                        }
                     }
 
 
@@ -298,7 +294,6 @@
                     function attachListeners() {
                         var dialogCourseProfile = document.getElementById("CourseProfile");
                         var CourseProfilebutton = document.getElementsByClassName("CourseCard");
-
                         for (var i = 0; i < CourseProfilebutton.length; i++) {
 
                             if (!dialogCourseProfile.showModal) {
@@ -325,16 +320,18 @@
                     }
 
 
-
                     //TODO: implement server side
                     function DeleteCourse() {
+                        var CCardName = this.parentElement.parentElement.firstElementChild.firstElementChild;
+                        alert(CCardName.innerHTML);
+                        socket.emit('deleteCourse', CCardName.innerHTML);
                         var ElementToRemove = this.parentElement.parentElement;
-                        var index = MyCourses.indexOf(ElementToRemove.getElementsByClassName("mdl-card__title-text")[0].innerHTML);
-                        var courseCRN = CRNs[index];
-                        var indexCRN = CurrentCourses.indexOf(courseCRN);
-                        if (indexCRN > -1) {
-                            CurrentCourses.splice(indexCRN, 1);
-                        }
+//                        var index = MyCourses.indexOf(ElementToRemove.getElementsByClassName("mdl-card__title-text")[0].innerHTML);
+//                        var courseCRN = CRNs[index];
+//                        var indexCRN = CurrentCourses.indexOf(courseCRN);
+//                        if (indexCRN > -1) {
+//                            CurrentCourses.splice(indexCRN, 1);
+//                        }
                         ElementToRemove.parentElement.removeChild(ElementToRemove);
                         //The code on client side is now ready. We only need queries.
                     }
