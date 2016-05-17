@@ -109,10 +109,11 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-
 // routes ======================================================================
 require('./app/cr-auth-routes')(app, passport);  // load our routes and pass in our app and fully configured passport
 require('./app/search.js')(app, connection, io); // load our routes and pass in our app and fully configured search functionality.
+
+//TODO: pass user
 require('./routes/home.js')(app, connection, io);// load our routes and pass in our app and renders the home page.
 require('./app/ceia.js')(app, connection, io); //load the ceia forms.
 

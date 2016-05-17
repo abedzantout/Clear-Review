@@ -18,6 +18,24 @@
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="user-button">
                     <%= user.email %>
                 </button>
+
+                <script>
+                    var socket = io();
+                    var str = document.getElementById("user-button").innerHTML
+                    socket.emit('username', str.replace(/[^a-zA-Z0-9]+/g, "") )
+
+
+
+                </script>
+
+
+
+
+
+
+
+
+
                 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
                     for="user-button">
                     <li class="mdl-menu__item"><a href="/logout">Logout</a></li>

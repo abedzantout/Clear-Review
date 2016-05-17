@@ -1,15 +1,16 @@
 var app = require('express');
 var router = app.Router();
 var url = require('url');
-
+var session = require('express-session');
 /**
  *
  * @param app
  * @param connection
  * @param io
+ * @param user
  * @return router and middleware responsible for page rendering of content in database in real time
  */
-module.exports = function (app, connection, io) {
+module.exports = function (app, connection, io, passport) {
     connection.query('SELECT title from course', function (err, rows, fields) {
         if (err) throw err;
         var data = [];
@@ -22,9 +23,7 @@ module.exports = function (app, connection, io) {
                 data: data
             });
         });
-
     });
-
     // connection.query('INSERT INTO ENROLL VALUES(?,?)', function(err, rows, fields) {
     //    if(err) throw err;
     //     var data = [];
@@ -36,7 +35,6 @@ module.exports = function (app, connection, io) {
     //         })
     //     })
     // });
-
     connection.query('SELECT FIRST_NAME, SURNAME from Teacher', function (err, rows, fields) {
         if (err) throw err;
         var FIRST_NAME = [];
@@ -52,7 +50,6 @@ module.exports = function (app, connection, io) {
                 SURNAME: SURNAME
             });
         });
-
 
         for (var i = 0; i < rows.length; i++) {
             add(connection, rows[i].FIRST_NAME, rows[i].SURNAME, io);
@@ -74,24 +71,45 @@ module.exports = function (app, connection, io) {
             },
             function (err, rows, fields) {
                 if (err) throw err;
-                if(rows.length < 1) {
+                if (rows.length < 1) {
                     //this is where i want to emit the message
                     socket.emit('checkcrn', "error")
-                   //emitMessage('Course does not exist')
+                    //emitMessage('Course does not exist')
                 }
                 else if (rows.length > 0) {
                     socket.emit('checkcrn', rows[0].CRN);
+                    checkStudentIfEnrolloed(connection, rows[0].CRN);
                 }
             });
     }
 
-
-    function emitMessage(msg) {
-        console.log(msg);
-       if(msg) return true;
+    function checkStudentIfEnrolloed(connection, CRN) {
+        var query = "SELECT CRN FROM ENROLL WHERE CRN = ? AND STUDENTID = 2"
+        connection.query({
+            sql: query,
+            values: CRN
+        }, function (err, rows, fields) {
+            if (err) throw err;
+            if (rows.length < 1) {
+                addCourse(connection, CRN);
+            }
+            else {
+                console.log(rows[0].CRN)
+                console.log('YOU CANT ADD A COURSE')
+            }
+        })
     }
 
-
+    function addCourse(connection, CRN) {
+        var query = "INSERT INTO ENROLL VALUES(?, 2)"
+        connection.query({
+            sql: query,
+            values: [CRN]
+        }, function (err, rows, fields) {
+            if (err) throw err;
+            console.log(rows);
+        });
+    }
 
 
     function add(connection, FIRST_NAME, SURNAME, io) {
@@ -148,9 +166,4 @@ module.exports = function (app, connection, io) {
             });
         });
     });
-
-    app.get('/home', function (req, res) {
-        res.render('home.ejs');
-    });
-
 };
