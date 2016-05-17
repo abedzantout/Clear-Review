@@ -85,6 +85,7 @@ module.exports = function (app, passport) {
      */
     app.get('/home', isLoggedIn, function (req, res) {
         res.render('home.ejs', {
+            //TODO
             user: req.user // get the user out of session and pass to template
         });
     });

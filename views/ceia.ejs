@@ -28,6 +28,7 @@
     <meta name="msapplication-TileImage" content="images/touch/Logo_128x128.png">
     <meta name="msapplication-TileColor" content="#2F3BA2">
 
+
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#2F3BA2">
 
@@ -52,6 +53,9 @@
 
     <link rel="stylesheet" type="text/css" href="stylesheets/CEIA.css">
     <!-- End of styles-->
+
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 </head>
 
 <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
@@ -62,117 +66,193 @@
     </div>
 
 
-    <div class="mdl-layout--large-screen-only mdl-layout__header-row ">
-    </div>
+    <h2 style="margin-left:auto;margin-right:auto;">CMPS 253 - Software Engineering</h2>
+
 
 </header>
 <div id="header">
-    <h2>CMPS 253 - Software Engineering</h2>
+
     <h2>Mahmoud Bdeir</h2>
 </div>
 
-<form id="Survey" action="/home">
-    <table class="OptionsTable">
-        <tr>
-            <td>
-                <h5> - Was the grading system clear and fair ?</h5>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1YES">
-                    <input type="radio" id="Q1YES" class="mdl-radio__button" name="options1" value="1"
-                           style="float:left;">
-                    <span class="mdl-radio__label">Yes</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1NO" style="margin-left: 35%;">
-                    <input type="radio" id="Q1NO" class="mdl-radio__button" name="options1" value="2">
-                    <span class="mdl-radio__label">No</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1MAYBE" style="float:right;">
-                    <input type="radio" id="Q1MAYBE" class="mdl-radio__button" name="options1" value="2">
-                    <span class="mdl-radio__label">Maybe</span>
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h5> - Did this course increase your interest in the subject ?</h5>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q2YES">
-                    <input type="radio" id="Q2YES" class="mdl-radio__button" name="options2" value="1"
-                           style="float:left;">
-                    <span class="mdl-radio__label">Yes</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q2NO" style="margin-left: 35%;">
-                    <input type="radio" id="Q2NO" class="mdl-radio__button" name="options2" value="2">
-                    <span class="mdl-radio__label">No</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q2MAYBE" style="float:right;">
-                    <input type="radio" id="Q2MAYBE" class="mdl-radio__button" name="options2" value="2">
-                    <span class="mdl-radio__label">Maybe</span>
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h5> - Have you learned something valuable to you in this course ?</h5>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q3YES">
-                    <input type="radio" id="Q3YES" class="mdl-radio__button" name="options3" value="1"
-                           style="float:left;">
-                    <span class="mdl-radio__label">Yes</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q3NO" style="margin-left: 35%;">
-                    <input type="radio" id="Q3NO" class="mdl-radio__button" name="options3" value="2">
-                    <span class="mdl-radio__label">No</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q3MAYBE" style="float:right;">
-                    <input type="radio" id="Q3MAYBE" class="mdl-radio__button" name="options3" value="2">
-                    <span class="mdl-radio__label">Maybe</span>
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h5> - Did the instructor maintain your interest throughout the course ?</h5>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q4YES">
-                    <input type="radio" id="Q4YES" class="mdl-radio__button" name="options4" value="1"
-                           style="float:left;">
-                    <span class="mdl-radio__label">Yes</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q4NO" style="margin-left: 35%;">
-                    <input type="radio" id="Q4NO" class="mdl-radio__button" name="options4" value="2">
-                    <span class="mdl-radio__label">No</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q4MAYBE" style="float:right;">
-                    <input type="radio" id="Q4MAYBE" class="mdl-radio__button" name="options4" value="2">
-                    <span class="mdl-radio__label">Maybe</span>
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h5> - Would you recommend this course to other students ?</h5>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5YES">
-                    <input type="radio" id="Q5YES" class="mdl-radio__button" name="options5" value="1"
-                           style="float:left;">
-                    <span class="mdl-radio__label">Yes</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5NO" style="margin-left: 35%;">
-                    <input type="radio" id="Q5NO" class="mdl-radio__button" name="options5" value="2">
-                    <span class="mdl-radio__label">No</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5MAYBE" style="float:right;">
-                    <input type="radio" id="Q5MAYBE" class="mdl-radio__button" name="options5" value="2">
-                    <span class="mdl-radio__label">Maybe</span>
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input id="SubmitButton" type="submit" class="mdl-button mdl-js-button mdl-button--raised"
-                       value="SUBMIT"/>
-            </td>
-        </tr>
 
-    </table>
+<form id="Survey" action="">
+
 
 </form>
+<script>
+
+    var socket = io();
+
+    //var QuestionsArr = ['Was the grading system clear and fair?', 'Did this course increase your interest in the subject?', 'Have you learned something valuable to you in this course?', 'Did the instructor maintain your interest throughout the course?', 'Would you recommend this course to other students?'];
+//    var Q1 = document.getElementById("Question1").innerHTML = " - " + QuestionsArr[0];
+//    var Q2 = document.getElementById("Question2").innerHTML = " - " + QuestionsArr[1];
+//    var Q3 = document.getElementById("Question3").innerHTML = " - " + QuestionsArr[2];
+//    var Q4 = document.getElementById("Question4").innerHTML = " - " + QuestionsArr[3];
+//    var Q5 = document.getElementById("Question5").innerHTML = " - " + QuestionsArr[4];
+
+
+
+    var holder = document.getElementById("Survey");
+    var table = document.createElement('table');
+    table.class="OptionsTable";
+    holder.appendChild(table);
+
+
+
+
+
+
+
+
+
+
+
+    socket.on('questions', function (data) {
+        var arr = Object.keys(data).map(function (k) {
+            return data[k];
+        });
+        console.log(arr[0].length);
+        for(var i = 0 ; i< arr[0].length; i++){
+
+
+            var tr = document.createElement('tr');
+            table.appendChild(tr);
+            table.className = "OptionsTable";
+            var td = document.createElement('td');
+            tr.appendChild(td);
+            var header = document.createElement('h5');
+            header.id="Question" + (i + 1);
+            header.innerHTML = arr[0][i];
+            td.appendChild(header);
+            var label1 = document.createElement('label');
+            label1.className="mdl-radio__label";
+            label1.for="Q"+ (i +1) +"YES";
+            var input = document.createElement('input');
+            input.type="radio";
+            input.id="Q"+ (i +1) +"YES";
+            input.className="mdl-radio__button";
+            input.name="options" + (i+1);
+            input.value="1";
+            input.style.float="left";
+            td.appendChild(label1);
+            label1.appendChild(input);
+            var span = document.createElement('span');
+            span.className="mdl-radio__label";
+            span.innerHTML="Yes";
+            label1.appendChild(span);
+
+            var label2 = document.createElement('label');
+            label2.className="mdl-radio mdl-js-radio mdl-js-ripple-effect";
+            label2.for="Q"+ (i +1) +"NO";
+            label2.style.marginLeft = "35%";
+            label2.className = "mdl-radio__label";
+            var input2 = document.createElement('input');
+            input2.type="radio";
+            input2.id="Q"+ (i +1) +"NO";
+            input2.className="mdl-radio__button";
+            input2.name="options" + (i+1);
+            input2.value="2";
+            td.appendChild(label2);
+            label2.appendChild(input2);
+            var span2 = document.createElement('span');
+            span2.className="mdl-radio__label";
+            span2.innerHTML="No";
+            label2.appendChild(span2);
+
+
+            var label3 = document.createElement('label');
+            label3.className="mdl-radio mdl-js-radio mdl-js-ripple-effect";
+            label3.for="Q"+ (i +1) +"MAYBE";
+            label3.style.float = "right";
+            label3.className = "mdl-radio__label";
+            var input3 = document.createElement('input');
+            input3.type="radio";
+            input3.id="Q"+ (i +1) +"MAYBE";
+            input3.className="mdl-radio__button";
+            input3.name="options" + (i+1);
+            input3.value="3";
+            td.appendChild(label3);
+            label3.appendChild(input3);
+            var span3 = document.createElement('span');
+            span3.className="mdl-radio__label";
+            span3.innerHTML="Maybe";
+            label3.appendChild(span3);
+
+
+        }
+
+        var finalTR = document.createElement('tr');
+        var finalTD = document.createElement('td');
+
+        table.appendChild(finalTR);
+        finalTR.appendChild(finalTD);
+
+
+        var btn = document.createElement('input');
+        btn.id="SubmitButton";
+        btn.type="submit";
+        btn.value="SUBMIT";
+        btn.className="mdl-button mdl-js-button mdl-button--raised";
+        finalTD.appendChild(btn);
+    });
+
+
+
+
+
+    /*
+
+
+     <tr>
+     <td>
+     <h5 id="Question1"></h5>
+     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1YES">
+     <input type="radio" id="Q1YES" class="mdl-radio__button" name="options1" value="1"
+     style="float:left;">
+     <span class="mdl-radio__label">Yes</span>
+     </label>
+     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1NO" style="margin-left: 35%;">
+     <input type="radio" id="Q1NO" class="mdl-radio__button" name="options1" value="2">
+     <span class="mdl-radio__label">No</span>
+     </label>
+     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1MAYBE" style="float:right;">
+     <input type="radio" id="Q1MAYBE" class="mdl-radio__button" name="options1" value="2">
+     <span class="mdl-radio__label">Maybe</span>
+     </label>
+     </td>
+     </tr>
+     <tr>
+     <td>
+
+
+     </table>
+     */
+
+    document.getElementById('SubmitButton').addEventListener('click', function () {
+        socket.emit('clientMessage', 'DUCK message');
+    })
+
+
+    //    <td>
+    //    <h5 id="Question5"></h5>
+    //            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5YES">
+    //            <input type="radio" id="Q5YES" class="mdl-radio__button" name="options5" value="1"
+    //    style="float:left;">
+    //            <span class="mdl-radio__label">Yes</span>
+    //            </label>
+    //            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5NO" style="margin-left: 35%;">
+    //            <input type="radio" id="Q5NO" class="mdl-radio__button" name="options5" value="2">
+    //            <span class="mdl-radio__label">No</span>
+    //            </label>
+    //            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5MAYBE" style="float:right;">
+    //            <input type="radio" id="Q5MAYBE" class="mdl-radio__button" name="options5" value="2">
+    //            <span class="mdl-radio__label">Maybe</span>
+    //            </label>
+    //            </td>
+
+
+</script>
 
 
 <script src="javascripts/Libraries/material.js"></script>

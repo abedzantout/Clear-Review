@@ -25,6 +25,17 @@ module.exports = function (app, connection, io) {
 
     });
 
+    // connection.query('INSERT INTO ENROLL VALUES(?,?)', function(err, rows, fields) {
+    //    if(err) throw err;
+    //     var data = [];
+    //     console.log(data);
+    //     io('connection', function(socket){
+    //         socket.emit('QandA', {
+    //             //TODO: to modify
+    //             data: data
+    //         })
+    //     })
+    // });
 
     connection.query('SELECT FIRST_NAME, SURNAME from Teacher', function (err, rows, fields) {
         if (err) throw err;
@@ -46,16 +57,41 @@ module.exports = function (app, connection, io) {
         for (var i = 0; i < rows.length; i++) {
             add(connection, rows[i].FIRST_NAME, rows[i].SURNAME, io);
         }
-
-
     });
 
 
     io.on('connection', function (socket) {
-        socket.on('clientMessage', function (msg) {
-            console.log(msg);
+        socket.on('checkcrn', function (msg) {
+            console.log("message " + msg);
+            checkCRN(connection, msg, socket)
         });
     });
+
+    function checkCRN(connection, CRN, socket) {
+        connection.query({
+                sql: 'SELECT CRN, TITLE, NUMBER, CREDIT_NUM, SUBJECT FROM COURSE c JOIN COURSEINSTANCE ci ON (c.courseID = ci.courseID) WHERE CRN = ?',
+                values: CRN
+            },
+            function (err, rows, fields) {
+                if (err) throw err;
+                if(rows.length < 1) {
+                    //this is where i want to emit the message
+                    socket.emit('checkcrn', "error")
+                   //emitMessage('Course does not exist')
+                }
+                else if (rows.length > 0) {
+                    socket.emit('checkcrn', rows[0].CRN);
+                }
+            });
+    }
+
+
+    function emitMessage(msg) {
+        console.log(msg);
+       if(msg) return true;
+    }
+
+
 
 
     function add(connection, FIRST_NAME, SURNAME, io) {
@@ -76,10 +112,7 @@ module.exports = function (app, connection, io) {
                 NUMBER.push(rows[i].NUMBER);
                 CREDIT_NUM.push(rows[i].CREDIT_NUM);
             }
-
             console.log(TITLE + ' ' + COURSEID)
-
-
             io.on('connection', function (socket) {
                 socket.emit('professorProfile', {
                     TITLE: TITLE,

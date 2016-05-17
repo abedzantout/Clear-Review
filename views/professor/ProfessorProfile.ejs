@@ -2,6 +2,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/ProfessorProfile.css">
     <!-- The nodejs code below is hard coded for now. These variables should be assigned with a DB query-->
     <script>
+
+
+
         var socket = io();
         socket.on('professorProfile', function (data) {
             var arr = Object.keys(data).map(function (k) {
@@ -9,13 +12,14 @@
             });
             // console.log( arr);
             //title
-            console.log(arr[0][1]);
+            console.log("title: " + arr[0][1]);
             // courseID
-            console.log(arr[1][1]);
+            console.log("courseID " + arr[1][1]);
             // code (200)
-            console.log(arr[2][1]);
+            console.log("code " + arr[2][1]);
             // number of credits
-            console.log(arr[3][1]);
+            console.log("number of credits " + arr[3][1]);
+
         });
     </script>
      <div class="ProfessorProfileHeader">

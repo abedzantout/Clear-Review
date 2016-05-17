@@ -13,8 +13,22 @@ var url = require('url');
  * @param io
  */
 
-module.exports = function(app, connection, io) {
-    app.get('/ceia', function(req, res){
+module.exports = function (app, connection, io) {
+    connection.query('SELECT question FROM QUESTION', function (err, rows, fields) {
+        if (err) throw err;
+        var data = [];
+        for (var i = 0; i < rows.length; i++) {
+            data.push(rows[i].question)
+        }
+        io.on('connection', function (socket) {
+            socket.emit('questions', {
+                data: data
+            })
+        });
+    });
+
+
+    app.get('/ceia', function (req, res) {
         res.render('ceia.ejs');
     });
 }
