@@ -185,9 +185,11 @@
                                 WarningMessage.innerHTML = "The course you have chosen is either already in your list or is not a course at all.";
                             }
                             else {
-                                console.log(data);
+
+
                             }
                         });
+                        AddCourse("Numerical Computing", "251", "3", "CMPS");
                     };
 
                     //                        if (inputCRN.value) {
@@ -323,7 +325,6 @@
                     //TODO: implement server side
                     function DeleteCourse() {
                         var CCardName = this.parentElement.parentElement.firstElementChild.firstElementChild;
-                        alert(CCardName.innerHTML);
                         socket.emit('deleteCourse', CCardName.innerHTML);
                         var ElementToRemove = this.parentElement.parentElement;
 //                        var index = MyCourses.indexOf(ElementToRemove.getElementsByClassName("mdl-card__title-text")[0].innerHTML);

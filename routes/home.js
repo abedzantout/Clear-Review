@@ -58,8 +58,6 @@ module.exports = function (app, connection, io, passport) {
             deleteCourse(subject, number);
             console.log("delete course: " + subject + " " + number);
         })
-
-
     });
 
     function checkCRN(connection, CRN, socket) {

@@ -81,32 +81,11 @@
 
 </form>
 <script>
-
     var socket = io();
-
-    //var QuestionsArr = ['Was the grading system clear and fair?', 'Did this course increase your interest in the subject?', 'Have you learned something valuable to you in this course?', 'Did the instructor maintain your interest throughout the course?', 'Would you recommend this course to other students?'];
-//    var Q1 = document.getElementById("Question1").innerHTML = " - " + QuestionsArr[0];
-//    var Q2 = document.getElementById("Question2").innerHTML = " - " + QuestionsArr[1];
-//    var Q3 = document.getElementById("Question3").innerHTML = " - " + QuestionsArr[2];
-//    var Q4 = document.getElementById("Question4").innerHTML = " - " + QuestionsArr[3];
-//    var Q5 = document.getElementById("Question5").innerHTML = " - " + QuestionsArr[4];
-
-
-
     var holder = document.getElementById("Survey");
     var table = document.createElement('table');
     table.class="OptionsTable";
     holder.appendChild(table);
-
-
-
-
-
-
-
-
-
-
 
     socket.on('questions', function (data) {
         var arr = Object.keys(data).map(function (k) {
@@ -184,11 +163,8 @@
 
         var finalTR = document.createElement('tr');
         var finalTD = document.createElement('td');
-
         table.appendChild(finalTR);
         finalTR.appendChild(finalTD);
-
-
         var btn = document.createElement('input');
         btn.id="SubmitButton";
         btn.type="submit";
@@ -196,60 +172,10 @@
         btn.className="mdl-button mdl-js-button mdl-button--raised";
         finalTD.appendChild(btn);
     });
-
-
-
-
-
-    /*
-
-
-     <tr>
-     <td>
-     <h5 id="Question1"></h5>
-     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1YES">
-     <input type="radio" id="Q1YES" class="mdl-radio__button" name="options1" value="1"
-     style="float:left;">
-     <span class="mdl-radio__label">Yes</span>
-     </label>
-     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1NO" style="margin-left: 35%;">
-     <input type="radio" id="Q1NO" class="mdl-radio__button" name="options1" value="2">
-     <span class="mdl-radio__label">No</span>
-     </label>
-     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q1MAYBE" style="float:right;">
-     <input type="radio" id="Q1MAYBE" class="mdl-radio__button" name="options1" value="2">
-     <span class="mdl-radio__label">Maybe</span>
-     </label>
-     </td>
-     </tr>
-     <tr>
-     <td>
-
-
-     </table>
-     */
-
     document.getElementById('SubmitButton').addEventListener('click', function () {
         socket.emit('clientMessage', 'DUCK message');
     })
 
-
-    //    <td>
-    //    <h5 id="Question5"></h5>
-    //            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5YES">
-    //            <input type="radio" id="Q5YES" class="mdl-radio__button" name="options5" value="1"
-    //    style="float:left;">
-    //            <span class="mdl-radio__label">Yes</span>
-    //            </label>
-    //            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5NO" style="margin-left: 35%;">
-    //            <input type="radio" id="Q5NO" class="mdl-radio__button" name="options5" value="2">
-    //            <span class="mdl-radio__label">No</span>
-    //            </label>
-    //            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="Q5MAYBE" style="float:right;">
-    //            <input type="radio" id="Q5MAYBE" class="mdl-radio__button" name="options5" value="2">
-    //            <span class="mdl-radio__label">Maybe</span>
-    //            </label>
-    //            </td>
 
 
 </script>
